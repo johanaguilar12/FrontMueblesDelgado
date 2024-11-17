@@ -1,3 +1,102 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 
+=======================================================
+Globales
+=======================================================
+*/
+:root {
+    --color-primary: #253F70; /* Azul */
+    --color-primary-light: #1A4A89; /* Azul oscuro para hover */
+    --color-tertiary: #F2F2F2; /* Blanco */
+    --color-alert: #E57373; /* Rojo */
+}
+
+
+/* 
+=======================================================
+Login
+=======================================================
+*/
+
+.error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    color: red;
+    font-size: 0.875rem;
+    background-color: #ffe6e6;
+    padding: 0.5rem;
+    border: 1px solid red;
+    border-radius: 5px;
+    margin-top: 0.25rem;
+    z-index: 10;
+}
+
+.form-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: 0.2s 0.7s ease-in-out;
+}
+
+.title {
+    font-size: 2.2rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.input-field--login {
+    position: relative;
+    width: 100%;
+    height: 55px;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    border-radius: 55px;
+    display: flex;
+    align-items: center;
+}
+
+.input-field--login i {
+    text-align: center;
+    line-height: 55px;
+    color: #acacac;
+    font-size: 20px;
+}
+
+.input-field--login input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 3rem);
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
+
+.btn__login {
+    display: inline-block;
+    text-align: center;
+    font-size: 1rem;
+}
+
+
+.btn__login:hover {
+    background-color: var(--color-primary-light);
+}
+
+.shadow-custom {
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+}

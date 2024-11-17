@@ -5,7 +5,12 @@ export default {
     './public/index.html',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        customBlue: '#253F70',
+        customBlueLight: '#1A4A89',
+      },
+    },
   },
   plugins: [],
 }
