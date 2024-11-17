@@ -1,17 +1,11 @@
 
 
-
 export const handleKeyPress = (e) => {
   const spaceRegex = /[\s]/;
   const letterNumsRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+$/;
   if (spaceRegex.test(e.key) || !letterNumsRegex.test(e.key)) {
     e.preventDefault();
   }
-};
-
-export const validateEmailUADY = (email) => {
-  const emailRegex = /^a\d{8}@alumnos\.uady\.mx$/;
-  return emailRegex.test(email);
 };
 
 export const validatePassword = (password) => {

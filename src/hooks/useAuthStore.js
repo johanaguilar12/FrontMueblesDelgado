@@ -12,7 +12,7 @@ export const useAuthStore = () => {
     try {
       const { data } = await mueblesDelgadoApi.post("/auth", {
         name: username,
-        password,
+        password,            //! Cambiar nombres dependiendo de como se reciba del spring
       });
       localStorage.setItem("token", data.token);
       dispatch(onLogin(data.user));

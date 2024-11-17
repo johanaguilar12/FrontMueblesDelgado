@@ -1,15 +1,15 @@
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-// import { useAuthStore } from "../hooks/useAuthStore";
-// import { useEffect } from "react";
+import { useAuthStore } from "../hooks/useAuthStore";
 // import { LoadingElement } from "../helpers/LoadingElement";
 
 export const PublicRoutes = ({children}) => {
 
-    // const { status, checkAuthToken } = useAuthStore();
+    const { status, checkAuthToken } = useAuthStore();
 
-    // useEffect(() => {
-    //   checkAuthToken();
-    // }, [])
+    useEffect(() => {
+      checkAuthToken();
+    }, [])
 
     // if (status === "checking") {
     //     return <LoadingElement />
@@ -18,7 +18,7 @@ export const PublicRoutes = ({children}) => {
 
     //Si no esta autenticado muestra el login y si esta autenticado redirige al panel de administrador
 
-    const status = "not-authenticated";
+    // const status = "not-authenticated";
     
     
     return status === "not-authenticated" 
