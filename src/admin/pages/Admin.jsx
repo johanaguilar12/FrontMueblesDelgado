@@ -1,8 +1,11 @@
+import { SideBar } from "../components"
+
+
 
 export const Admin = () => {
   return (
-    <div>Admin
-      <h1>prueba</h1>
-    </div>
+    <>
+      <h1>hola</h1>
+    </>
   )
 }

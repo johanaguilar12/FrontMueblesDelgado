@@ -8,13 +8,16 @@ Globales
 =======================================================
 */
 :root {
-    --color-primary: #253F70; /* Azul */
-    --color-primary-light: #1A4A89; /* Azul oscuro para hover */
-    --color-tertiary: #F2F2F2; /* Blanco */
-    --color-alert: #E57373; /* Rojo */
+    --base-clr: #253f70;
+    --line-clr: #42434a;
+    --hover-clr: #6591bdf0;
+    --text-clr: #e6e6ef;
+    --accent-clr: #0064c8;
+    --secondary-text-clr: #b0b3c1;
+    --color-primary-light: #1A4A89; 
+    --background-primary: #ffffff;
+    --btn-yellow: #ffcb66;
 }
-
-
 /* 
 =======================================================
 Login
@@ -99,4 +102,140 @@ input[type="password"] {
 
 .shadow-custom {
     box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
+
+/* 
+=======================================================
+Loading element
+=======================================================
+*/
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+  
+.spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 
+=======================================================
+Admin
+=======================================================
+*/
+
+.body__admin {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    background-color: var(--background-primary);
+}
+
+.main__admin {
+    padding: min(30px, 7%);
+}
+
+.main__admin p{
+    color: #b0b3c1;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.container__admin {
+    border: 1px solid #42434a;
+    border-radius: 1em;
+    margin-bottom: 20px;
+
+    padding: min(3em, 15%);
+
+    h2, p {margin-top: 1em;}
+}
+
+@media(max-width: 800px) {
+    .body__admin {
+        grid-template-columns: 1fr;
+    }
+    .main__admin {
+        padding: 2em 1em 60px 1em;
+    }
+    .container__admin {
+        border: none;
+        padding: 0;
+    }
+    #sidebar {
+       height: 60px;
+       width: 100%;
+       border-right: none;
+       border-top: 1px solid #42434a;
+       padding: 0;
+       position: fixed;
+       top: unset;
+       bottom: 0;
+
+       > ul {
+        padding: 0;
+        display: grid;
+        grid-auto-columns: 60px;
+        grid-auto-flow: column;
+        align-items: center;
+        overflow-x: auto;
+       }
+
+       ul li {
+        height: 100%;
+       }
+
+       ul a, ul .dropdown-btn {
+        width: 60px;
+        height: 60px;
+        padding: 0;
+        border-radius: 0;
+        justify-content: center;
+       }
+       
+       ul li span, ul li:first-child, .dropdown-btn svg:last-child{
+        display: none;
+       }
+
+       ul li .sub-menu.show {
+        position: fixed;
+        bottom: 60px;
+        left: 0;
+        box-sizing: border-box;
+        height: 60px;
+        width: 100%;
+        background-color: #222533;
+        border-top: 1px solid #42434a;
+        display: flex;
+        justify-content: center;
+
+        > div {
+            overflow-x: auto;
+        }
+
+        li {
+            display: inline-flex;
+        }
+        a {
+            box-sizing: border-box;
+            padding: 1em;
+            width: auto;
+            justify-content: center;
+        }
+       }
+    }
 }
