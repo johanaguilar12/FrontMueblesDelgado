@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useAuthStore, useForm } from "../../hooks";
-import { handleKeyPress, showErrorAlert, showSuccess, validateUser } from "../components";
+import { handleKeyPress, showErrorAlert, validateUser } from "../components";
 
 
 const initialFormSingUp = {
@@ -65,21 +65,21 @@ return (
         <form onSubmit={onSubmitFormSignIn} className="form-login py-4 px-6 sm:py-6 sm:px-12">
           <h1 className="title text-center">Inicio de sesión</h1>
           <div className="input-field--login">
-          <i className="absolute left-4 top-1/2 transform -translate-y-1/2">
-            <FontAwesomeIcon icon={faUser} />
-          </i>
-          <input 
-            type="text" 
-            placeholder="Usuario" 
-            name="userSignIn" 
-            id="userSignIn" 
-            value={userSignIn} 
-            onChange={onInputChange}
-            onKeyDown={handleKeyPress}
-            autoComplete="username"
-            className="w-full pl-12 pr-4 py-2 rounded-full"
-          />
-        </div>
+            <i className="absolute left-4 top-1/2 transform -translate-y-1/2">
+              <FontAwesomeIcon icon={faUser} />
+            </i>
+            <input 
+              type="text" 
+              placeholder="Usuario" 
+              name="userSignIn" 
+              id="userSignIn" 
+              value={userSignIn} 
+              onChange={onInputChange}
+              onKeyDown={handleKeyPress}
+              autoComplete="username"
+              className="w-full pl-12 pr-4 py-2 rounded-full"
+            />
+          </div>
 
         <div className="input-field--login">
           <i className="absolute left-4 top-1/2 transform -translate-y-1/2">
