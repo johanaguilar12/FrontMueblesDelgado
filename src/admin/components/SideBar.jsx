@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronLeft, faClipboardList, faHome, faRoute, faSignOut, faUserShield, faWarehouse } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronLeft, faClipboardList, faHome, faRoute, faSignOut, faTruck, faUserShield, faWarehouse } from "@fortawesome/free-solid-svg-icons";
 import './SideBar.css'
 
 export const SideBar = () => {
@@ -106,6 +106,23 @@ export const SideBar = () => {
             </Link>
         </li>
         {/* DROPDOWN menu */}
+        <li>
+            <button onClick={toggleSubMenu} className="dropdown-btn" id="dropdown-btn">
+                <FontAwesomeIcon icon={faTruck} className="sizeSVG"/>
+                <span>Logistica</span>
+                <FontAwesomeIcon icon={faChevronDown} className="sizeSVG"/>
+            </button>
+            <ul className="sub-menu">
+                <div>
+                    <li className={activeTab === 'altaCamion' ? 'active' : ''} onClick={() => handleTabClick('altaCamion')}>
+                        <Link to={'registertruck'}>Dar de alta Camión</Link>
+                    </li>
+                    <li className={activeTab === 'altaChofer' ? 'active' : ''} onClick={() => handleTabClick('altaChofer')}>
+                        <Link to={'registerdriver'}>Dar de alta Chófer</Link>
+                    </li>
+                </div>
+            </ul>
+        </li>
         <li>
             <button onClick={toggleSubMenu} className="dropdown-btn" id="dropdown-btn">
                 <FontAwesomeIcon icon={faUserShield} className="sizeSVG"/>
