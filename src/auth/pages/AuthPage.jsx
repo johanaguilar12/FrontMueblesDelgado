@@ -77,7 +77,7 @@ return (
               onChange={onInputChange}
               onKeyDown={handleKeyPress}
               autoComplete="username"
-              className="w-full pl-12 pr-4 py-2 rounded-full"
+              className="w-full pl-12 pr-4 py-2 rounded-full customInput"
             />
           </div>
 
@@ -93,7 +93,7 @@ return (
             value={passwordSignIn}
             onChange={onInputChange}
             autoComplete="current-password"
-            className="w-full pl-12 pr-4 py-2 rounded-full"
+            className="w-full pl-12 pr-4 py-2 rounded-full customInput"
           />
           <i className="absolute right-4 top-1/2 transform -translate-y-1/2">
             <span onClick={toggleVisibilityPassword} className="cursor-pointer p-3" role="button">

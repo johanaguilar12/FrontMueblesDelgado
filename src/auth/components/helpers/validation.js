@@ -29,7 +29,7 @@ export const validatePassword = (password) => {
     },
   ];
 
-  const failedValidation = validations.find((v) => !v.check(password));
+  const failedValidation = validations.find((validation) => !validation.check(password));
   return failedValidation ? failedValidation.message : "";
 };
 

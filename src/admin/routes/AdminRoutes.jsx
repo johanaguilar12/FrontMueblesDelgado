@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { AddPackingList, Admin, RouteCalculator, SearchFurniture } from "../pages";
+import { AddPackingList, Admin, DeliveryTruckAdmin, RouteCalculator, SearchFurniture } from "../pages";
 import { CreateAccountForm, DeleteAccountForm, RegisterDriverForm, RegisterTruckForm } from "../components";
 
 export const AdminRoutes = [
@@ -34,6 +34,10 @@ export const AdminRoutes = [
   {
     path: 'registertruck',
     element: <RegisterTruckForm />,
+  },
+  {
+    path: 'deliveryAdmin',
+    element: <DeliveryTruckAdmin />,
   },
   {
     path: "*",

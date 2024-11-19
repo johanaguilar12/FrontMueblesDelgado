@@ -1,25 +1,32 @@
 import { useForm } from "../../hooks"
-
-
+import { showErrorAlert } from "../../auth/components";
+import { onlyLettersOnKeyDown, onlyNumbersOnKeyDown } from "./helpers";
+import { Link } from "react-router-dom";
 
 const initialFormRegisterDriver = {
-    driverName: '',
-    driverLicense: '',
+  driverName: '',
+  driverLicense: '',
 }
 
 const formValidationsRegisterDriver = {
-    driverName: [(value) => value.trim() !== '', 'El nombre del conductor es obligatorio'],
-    driverLicense: [(value) => value.trim() !== '', 'La licencia del conductor es obligatoria'],
+  driverName: [(value) => value.trim() !== '', 'El nombre del conductor es obligatorio'],
+  driverLicense: [(value) => value.trim() !== '', 'La licencia del conductor es obligatoria'],
 }
+
 export const RegisterDriverForm = () => {
+  const {driverName, driverLicense, onInputChange, onResetForm, isFormValid} = useForm(initialFormRegisterDriver, formValidationsRegisterDriver);
 
-    const {driverName, driverLicense, onInputChange, onResetForm, isFormValid} = useForm(initialFormRegisterDriver, formValidationsRegisterDriver);
 
-    const handleSubmit = ( e ) => {
-        e.preventDefault();
-        console.log(driverLicense, driverName)
-    
+  const onSubmitFormDriverRegister = ( e ) => {
+    e.preventDefault();
+
+    if (!isFormValid) {
+      showErrorAlert("Todos los campos son obligatorios");
+      return;
     }
+
+    console.log(driverLicense, driverName)
+  }
 
 
   return (
@@ -28,7 +35,7 @@ export const RegisterDriverForm = () => {
         <h2 className="text-2xl font-bold text-center text-customBlue mb-6">
           Registrar Conductor
         </h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmitFormDriverRegister}>
           <div className="mb-4">
             <label
               htmlFor="driverName"
@@ -42,6 +49,7 @@ export const RegisterDriverForm = () => {
               id="driverName"
               value={driverName}
               onChange={onInputChange}
+              onKeyDown={onlyLettersOnKeyDown}
               className="w-full px-4 py-2 border border-lineclr rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlueLight"
             />
           </div>
@@ -58,6 +66,7 @@ export const RegisterDriverForm = () => {
               id="driverLicense"
               value={driverLicense}
               onChange={onInputChange}
+              onKeyDown={onlyNumbersOnKeyDown}
               className="w-full px-4 py-2 border border-lineclr rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlueLight"
             />
           </div>
@@ -68,6 +77,14 @@ export const RegisterDriverForm = () => {
             Registrar Conductor
           </button>
         </form>
+        <Link to={'/admin/panel/deliveryadmin'}>
+          <button
+            type="button"
+            className="mt-5 w-full bg-btnyellow text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          >
+            Asignarle Un Camión
+          </button>
+        </Link>
       </div>
     </div>
   );
