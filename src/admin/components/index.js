@@ -7,3 +7,4 @@ export * from './RegisterDriverForm';
 export * from './RegisterTruckForm';
 export * from './Sidebar';
 export * from './deliveryAdmin';
+export * from './inventoryAdmin';
