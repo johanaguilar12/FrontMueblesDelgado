@@ -84,11 +84,12 @@ export const TableAssignDriver = ({
             </h3>
             <form onSubmit={handleFormAssignSubmit} className="space-y-4">
               <div>
-                <label className="block text-baseclr font-semibold mb-2">
+                <label htmlFor="selectDriver" className="block text-baseclr font-semibold mb-2">
                   Seleccionar Conductor
                 </label>
                 <select
                   value={formData.driverId}
+                  id="selectDriver"
                   onChange={(e) =>
                     setFormData({ ...formData, driverId: e.target.value })
                   }

@@ -27,6 +27,29 @@ export const useTrucksStore = () => {
         }
     }
 
+    const startAssignOrderToTruck = async (orderId, trackingNumber) => {
+        try {
+            const numericOrderId = parseInt(orderId, 10);
+            const numericTrackingNumber = parseInt(trackingNumber, 10);
+    
+            if (isNaN(numericOrderId) || isNaN(numericTrackingNumber)) {
+                throw new Error("Los valores de orderId y trackingNumber deben ser números.");
+            }
+
+            const { data } = await mueblesDelgadoApi.post("/logistics/assign", {
+                orderId: numericOrderId,
+                trackingNumber: numericTrackingNumber,
+            });
+            console.log("Camiones actualizados:", data);
+        } catch (error) {
+            console.error(
+                "Error al registrar los camiones:",
+                error.response?.data || error.message
+            );
+            throw new Error("Error al actualizar los camiones");
+        }
+    };
+
 
 
   return {
@@ -36,6 +59,7 @@ export const useTrucksStore = () => {
     //*Métodos
     startGetTrucks,
     startNewTruck,
+    startAssignOrderToTruck,
 
   }
 }

@@ -89,16 +89,16 @@ export const SideBar = () => {
                         <span>Calcular Ruta</span>
                     </Link>
                 </li>
-                <li className={activeTab === '/addpackinglist' ? 'active' : ''}>
-                    <Link to={'addpackinglist'}>
+                <li className={activeTab === '/inventoryadmin' ? 'active' : ''}>
+                    <Link to={'inventoryadmin'}>
                         <FontAwesomeIcon icon={faClipboardList} className="sizeSVG" />
-                        <span>Agregar PackingList</span>
+                        <span>Inventariado</span>
                     </Link>
                 </li>
                 <li className={activeTab === '/searchfurniture' ? 'active' : ''}>
                     <Link to={'searchfurniture'}>
                         <FontAwesomeIcon icon={faWarehouse} className="sizeSVG" />
-                        <span>Buscar Mueble</span>
+                        <span>Almacenista</span>
                     </Link>
                 </li>
                 {/* DROPDOWN menu */}
@@ -111,7 +111,10 @@ export const SideBar = () => {
                     <ul className="sub-menu">
                         <div>
                             <li className={activeTab === '/deliveryadmin' ? 'active' : ''}>
-                                <Link to={'deliveryadmin'}>Gestión de Entregas</Link>
+                                <Link to={'deliveryadmin'}>Gestión de Flota</Link>
+                            </li>
+                            <li className={activeTab === '/orderassignment' ? 'active' : ''}>
+                                <Link to={'orderassignment'}>Asignación de Orden</Link>
                             </li>
                             <li className={activeTab === '/registertruck' ? 'active' : ''}>
                                 <Link to={'registertruck'}>Dar de alta Camión</Link>

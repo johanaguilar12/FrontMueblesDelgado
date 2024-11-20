@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { Admin, DeliveryTruckAdmin, InventoryAdmin, RouteCalculator, SearchFurniture } from "../pages";
-import { CreateAccountForm, DeleteAccountForm, RegisterDriverForm, RegisterTruckForm } from "../components";
+import { CreateAccountForm, DeleteAccountForm, FormAssignmnetOrderToTruck, RegisterDriverForm, RegisterTruckForm } from "../components";
 
 
 export const AdminRoutes = [
@@ -13,7 +13,7 @@ export const AdminRoutes = [
     element: <RouteCalculator />,
   },
   {
-    path: 'addpackinglist',
+    path: 'inventoryadmin',
     element: <InventoryAdmin />,
   },
   {
@@ -39,6 +39,10 @@ export const AdminRoutes = [
   {
     path: 'deliveryAdmin',
     element: <DeliveryTruckAdmin />,
+  },
+  {
+    path: 'orderassignment',
+    element: <FormAssignmnetOrderToTruck />,
   },
   {
     path: "*",

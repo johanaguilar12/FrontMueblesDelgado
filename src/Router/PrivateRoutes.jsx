@@ -4,10 +4,10 @@ import { useAuthStore } from "../hooks/useAuthStore";
 import { LoadingElement } from "../helpers/LoadingElement";
 import { useDriversStore, useTrucksStore } from "../hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { onSetTrucks, onSetDrivers } from "../store";
+import { onSetTrucks, onSetDrivers, onSetPackingLists, onSetOrders } from "../store";
 
 export const PrivateRoutes = ({ children }) => {
-  const [trucksEjemplo, setTrucksEjemplo] = useState([
+  const trucksEjemplo = [
     {
       id: 1,
       trackingNumber: "Camión A",
@@ -35,8 +35,9 @@ export const PrivateRoutes = ({ children }) => {
       isAvailable: true,
       driver: null,
     },
-  ]);
-  const [drivers, setDrivers] = useState([
+  ];
+
+  const drivers = [
     {
       id: 101,
       name: "Carlos López",
@@ -52,13 +53,149 @@ export const PrivateRoutes = ({ children }) => {
       name: "Luis Hernández",
       license: "112131",
     },
-  ]);
+  ]
+
+  const PackingList = [
+    {
+      folio: "PL-001",
+      arrivalDate: "2024-10-30",
+      products: [
+        {
+          type: "Mesa",
+          brand: "IKEA",
+          color: "Blanco",
+          dimension: { width: 120, height: 75, depth: 60 },
+          quantity: 10,
+          buildTime: 45, // en minutos
+        },
+        {
+          type: "Silla",
+          brand: "Herman Miller",
+          color: "Negro",
+          dimension: { width: 50, height: 100, depth: 50 },
+          quantity: 20,
+          buildTime: 30, // en minutos
+        },
+      ],
+    },
+    {
+      folio: "PL-002",
+      arrivalDate: "2024-11-05",
+      products: [
+        {
+          type: "Escritorio",
+          brand: "OfficePro",
+          color: "Cerezo",
+          dimension: { width: 140, height: 80, depth: 70 },
+          quantity: 5,
+          buildTime: 60, // en minutos
+        },
+      ],
+    },
+    {
+      folio: "PL-003",
+      arrivalDate: "2024-11-12",
+      products: [
+        {
+          type: "Cama",
+          brand: "Sealy",
+          color: "Gris",
+          dimension: { width: 200, height: 50, depth: 180 },
+          quantity: 2,
+          buildTime: 90, // en minutos
+        },
+        {
+          type: "Buró",
+          brand: "IKEA",
+          color: "Nogal",
+          dimension: { width: 40, height: 60, depth: 40 },
+          quantity: 4,
+          buildTime: 20, // en minutos
+        },
+      ],
+    },
+  ];
+
+  const Orders = [
+    {
+      orderID: "O-001",
+      destination: "Ciudad de México, CDMX",
+      deliveryDate: "2024-11-01",
+      orderContent: [
+        {
+          type: "Mesa",
+          brand: "IKEA",
+          color: "Blanco",
+          dimension: { width: 120, height: 75, depth: 60 },
+          quantity: 10,
+          buildTime: 45, // en minutos
+        },
+        {
+          type: "Silla",
+          brand: "Herman Miller",
+          color: "Negro",
+          dimension: { width: 50, height: 100, depth: 50 },
+          quantity: 20,
+          buildTime: 30, // en minutos
+        },
+      ],
+    },
+    {
+      orderID: "O-002",
+      destination: "Guadalajara, Jalisco",
+      deliveryDate: "2024-11-05",
+      orderContent: [
+        {
+          type: "Escritorio",
+          brand: "OfficePro",
+          color: "Cerezo",
+          dimension: { width: 140, height: 80, depth: 70 },
+          quantity: 5,
+          buildTime: 60, // en minutos
+        },
+      ],
+    },
+    {
+      orderID: "O-003",
+      destination: "Monterrey, Nuevo León",
+      deliveryDate: "2024-11-12",
+      orderContent: [
+        {
+          type: "Cama",
+          brand: "Sealy",
+          color: "Gris",
+          dimension: { width: 200, height: 50, depth: 180 },
+          quantity: 2,
+          buildTime: 90, // en minutos
+        },
+        {
+          type: "Buró",
+          brand: "IKEA",
+          color: "Nogal",
+          dimension: { width: 40, height: 60, depth: 40 },
+          quantity: 4,
+          buildTime: 20, // en minutos
+        },
+      ],
+    },
+  ];
+  
+
+
+  
 
   // const { status, checkAuthToken } = useAuthStore();
   // const { drivers } = useSelector((state) => state.drivers);
   const dispatch = useDispatch();
-  dispatch(onSetTrucks(trucksEjemplo));
-  dispatch(onSetDrivers(drivers));
+
+  useEffect(() => {
+    dispatch(onSetTrucks(trucksEjemplo));
+    dispatch(onSetDrivers(drivers));
+    dispatch(onSetPackingLists(PackingList));
+    dispatch(onSetOrders(Orders));
+  }, [])
+  
+
   // const {drivers} = useDriversStore();
   // const {trucks} = useTrucksStore();
 

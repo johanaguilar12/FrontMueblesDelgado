@@ -54,7 +54,7 @@ export const AddPackingListForm = () => {
   };
 
   return (
-    <div className="container__admin shadow-custom w-full max-w-md">
+    <div className="container__admin shadow-custom w-full max-w-6xl">
       <h2 className="text-2xl font-bold text-center text-customBlue mb-6">
         Agregar PackingList
       </h2>
@@ -107,7 +107,7 @@ export const AddPackingListForm = () => {
           </button>
           <ul className="list-disc pl-5">
             {furnitureList.map((furniture, index) => (
-              <li key={index} className="flex justify-between items-center border">
+              <li key={index} className="flex justify-between items-center border my-3">
                 <div>
                     <span>{`Tipo: ${furniture.type}`}</span>
                     <br />
@@ -119,7 +119,7 @@ export const AddPackingListForm = () => {
                     <br />
                     <span>{`Cantidad: ${furniture.quantity}`}</span>
                     <br />
-                    <span>{`Tiempo de Montaje: ${furniture.buildTime}`}</span>
+                    <span>{`Tiempo de Montaje: ${furniture.buildTime} minutos`}</span>
                     <br />
                 </div>
                 <button

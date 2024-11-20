@@ -51,7 +51,7 @@ export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen}) =
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h3 className="font-bold text-xl mb-4">Agregar Mueble</h3>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="mb-4">
@@ -99,7 +99,7 @@ export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen}) =
             </label>
             <input
               type="dimension"
-              placeholder="Largo, Alto, Profundo"
+              placeholder="Largo, Alto, Ancho"
               name="dimension"
               id="dimension"
               value={dimension}
