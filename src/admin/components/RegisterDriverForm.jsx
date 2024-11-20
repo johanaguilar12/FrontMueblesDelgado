@@ -1,6 +1,6 @@
-import { useForm } from "../../hooks"
+import { useDriversStore, useForm } from "../../hooks"
 import { showErrorAlert } from "../../auth/components";
-import { onlyLettersOnKeyDown, onlyNumbersOnKeyDown } from "./helpers";
+import { onlyLettersOnKeyDown, onlyNumbersOnKeyDown, showSuccess } from "./helpers";
 import { Link } from "react-router-dom";
 
 const initialFormRegisterDriver = {
@@ -15,9 +15,10 @@ const formValidationsRegisterDriver = {
 
 export const RegisterDriverForm = () => {
   const {driverName, driverLicense, onInputChange, onResetForm, isFormValid} = useForm(initialFormRegisterDriver, formValidationsRegisterDriver);
+  const {startRegisterTruckDriver} = useDriversStore();
 
 
-  const onSubmitFormDriverRegister = ( e ) => {
+  const onSubmitFormDriverRegister = async ( e ) => {
     e.preventDefault();
 
     if (!isFormValid) {
@@ -25,7 +26,20 @@ export const RegisterDriverForm = () => {
       return;
     }
 
-    console.log(driverLicense, driverName)
+    try {
+
+      const truckDriver = {
+        name: driverName,
+        licenseNumber: parseInt(driverLicense),
+      }
+
+      await startRegisterTruckDriver(truckDriver);
+      onResetForm();
+
+      showSuccess('Conductor Registrado Exitosamente');
+    } catch (error) {
+      showErrorAlert(error.message);
+    }
   }
 
 

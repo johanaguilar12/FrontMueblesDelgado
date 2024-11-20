@@ -1,15 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import mueblesDelgadoApi from "../api/mueblesDelgadoApi";
-import { onSetTrucks } from "../store";
+import { onSetOrderTruckAssignments, onSetTrucks } from "../store";
+import { useAdmin } from "./useAdmin";
 
 
 export const useTrucksStore = () => {
-    const { trucks } = useSelector((state) => state.trucks);
+    const { trucks, orderTruckAssignments } = useSelector((state) => state.trucks);
+    const {startCommand, finishedCommand} = useAdmin();
     const dispatch = useDispatch();
 
     const startGetTrucks = async () => {
         try {
-            const {data} = await mueblesDelgadoApi.get("/logistics/trucks");
+            const {data} = await mueblesDelgadoApi.get("/delivery/trucks");
             dispatch(onSetTrucks(data.trucks));
         } catch (error) {
             console.log(error);
@@ -17,13 +19,19 @@ export const useTrucksStore = () => {
         }
     }
 
-    const startNewTruck = async (trucks) => {
+    const startRegisterDeliveryTruck = async (truck) => {
         try {
-            await mueblesDelgadoApi.post("/logistics/trucks", trucks);
-            console.log("Camiones actualizados:", data);
+            startCommand();
+
+            const {data} = await mueblesDelgadoApi.post("/delivery/truck", truck);
+            startGetTrucks();
+
+            finishedCommand();
+            return data;
         } catch (error) {
-            console.error("Error al registrar los camiones:", error.response?.data || error.message);
-            throw new Error("Error al actualizar los camiones");
+            finishedCommand();
+            console.log(error);
+            throw new Error("Error al agregar el camión");
         }
     }
 
@@ -50,16 +58,31 @@ export const useTrucksStore = () => {
         }
     };
 
+    const startGetOrderTruckAssignments = async () => {
+        try {
+            const {data} = await mueblesDelgadoApi.get("/logistics/assignments");
+            dispatch(onSetOrderTruckAssignments(data.assignments));
+        } catch (error) {
+            console.error("Error al registrar los camiones:", error.response?.data || error.message);
+            throw new Error("Error al actualizar los camiones");
+        }
+        
+    }
+
+
+
 
 
   return {
     //*Propiedades
     trucks,
+    orderTruckAssignments,
 
     //*Métodos
     startGetTrucks,
-    startNewTruck,
+    startRegisterDeliveryTruck,
     startAssignOrderToTruck,
+    startGetOrderTruckAssignments,
 
   }
 }

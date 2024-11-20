@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authSlice, driversSlice, inventorySlice, ordersSlice, trucksSlice } from "./";
+import { adminSlice, authSlice, driversSlice, inventorySlice, ordersSlice, trucksSlice } from "./";
 
 
 export const store = configureStore({
@@ -9,5 +9,6 @@ export const store = configureStore({
         trucks: trucksSlice.reducer,
         orders: ordersSlice.reducer,
         inventory: inventorySlice.reducer,
+        admin: adminSlice.reducer,
     },
 });

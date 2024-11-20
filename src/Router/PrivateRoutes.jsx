@@ -4,7 +4,8 @@ import { useAuthStore } from "../hooks/useAuthStore";
 import { LoadingElement } from "../helpers/LoadingElement";
 import { useDriversStore, useTrucksStore } from "../hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { onSetTrucks, onSetDrivers, onSetPackingLists, onSetOrders } from "../store";
+import { onSetTrucks, onSetDrivers, onSetPackingLists, onSetOrders, onSetOrderTruckAssignments, onSetAssignments } from "../store";
+import { useAdmin } from "../hooks/useAdmin";
 
 export const PrivateRoutes = ({ children }) => {
   const trucksEjemplo = [
@@ -179,13 +180,76 @@ export const PrivateRoutes = ({ children }) => {
       ],
     },
   ];
-  
 
+  const OrderTruckAssignment = [
+      {
+          "assignmentId": 1,
+          "orderId": 101,
+          "truckId": 1001
+      },
+      {
+          "assignmentId": 2,
+          "orderId": 102,
+          "truckId": 1002
+      }
+  ];
 
+  const assignmentsEjemplo = [
+    {
+      deliveryTruck: {
+        id: 1,
+        trackingNumber: "Camión A",
+        capacity: 100,
+        mileage: 100,
+        isAvailable: true,
+        driver: null,
+      },
+      truckDriver: {
+        id: 102,
+        name: "María Pérez",
+        license: "789101",
+      },
+    },
+    {
+      deliveryTruck: {
+        id: 2,
+        trackingNumber: "Camión B",
+        capacity: 100,
+        mileage: 100,
+        isAvailable: false,
+        driver: {
+          id: 101,
+          name: "Carlos López",
+        },
+      },
+      truckDriver: {
+        id: 101,
+        name: "Carlos López",
+        license: "123456",
+      },
+    },
+    {
+      deliveryTruck: {
+        id: 3,
+        trackingNumber: "Camión C",
+        capacity: 100,
+        mileage: 100,
+        isAvailable: true,
+        driver: null,
+      },
+      truckDriver: {
+        id: 103,
+        name: "Luis Hernández",
+        license: "112131",
+      },
+    },
+  ];
   
 
   // const { status, checkAuthToken } = useAuthStore();
   // const { drivers } = useSelector((state) => state.drivers);
+  const {status: statusCommand} = useAdmin();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -193,6 +257,8 @@ export const PrivateRoutes = ({ children }) => {
     dispatch(onSetDrivers(drivers));
     dispatch(onSetPackingLists(PackingList));
     dispatch(onSetOrders(Orders));
+    dispatch(onSetOrderTruckAssignments(OrderTruckAssignment));
+    dispatch(onSetAssignments(assignmentsEjemplo));
   }, [])
   
 
@@ -203,9 +269,9 @@ export const PrivateRoutes = ({ children }) => {
   //   checkAuthToken();
   // }, [])
 
-  // if (status === "checking") {
-  //   return <LoadingElement />
-  // }
+  if (statusCommand === "starting") {
+    return <LoadingElement />
+  }
 
 
 

@@ -1,7 +1,7 @@
-import { useForm } from "../../hooks"
-import { showErrorAlert } from "../../auth/components";
-import { onlyLettersOnKeyDown, onlyNumbersOnKeyDown } from "./helpers";
 import { Link } from "react-router-dom";
+import { useForm, useTrucksStore } from "../../hooks"
+import { onlyLettersOnKeyDown, onlyNumbersOnKeyDown, showSuccess } from "./helpers";
+import { showErrorAlert } from "../../auth/components";
 
 const initialFormRegisterDriver = {
   trackingNumber: '',
@@ -17,8 +17,9 @@ const formValidationsRegisterDriver = {
 
 export const RegisterTruckForm = () => {
   const {trackingNumber, capacity, mileage, onInputChange, onResetForm, isFormValid} = useForm(initialFormRegisterDriver, formValidationsRegisterDriver);
+  const {startRegisterDeliveryTruck} = useTrucksStore();
 
-  const onSubmitFormDriverRegister = ( e ) => {
+  const onSubmitFormDriverRegister = async ( e ) => {
     e.preventDefault();
 
     if (!isFormValid) {
@@ -26,7 +27,19 @@ export const RegisterTruckForm = () => {
       return;
     }
 
-    console.log(capacity, trackingNumber, mileage)
+    try {
+      const truck = {
+        trackingNumber,
+        capacity,
+        mileage,
+      };
+
+      await startRegisterDeliveryTruck(truck);
+      onResetForm();
+      showSuccess("Camión Registrado Correctamente");
+    } catch (error) {
+      showErrorAlert(error.message);
+    }
   }
 
   return (
@@ -49,7 +62,6 @@ export const RegisterTruckForm = () => {
               id="trackingNumber"
               value={trackingNumber}
               onChange={onInputChange}
-              onKeyDown={onlyLettersOnKeyDown}
               className="w-full px-4 py-2 border border-lineclr rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlueLight"
             />
           </div>

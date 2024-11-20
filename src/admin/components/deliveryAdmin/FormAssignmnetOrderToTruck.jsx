@@ -2,10 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useOrdersStore, useTrucksStore } from "../../../hooks";
 import { faEdit, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { TableTrackAssignments } from "./TableTrackAssignments";
 
 
 export const FormAssignmnetOrderToTruck = () => {
-    const {trucks, startAssignOrderToTruck} = useTrucksStore();
+    const {trucks, orderTruckAssignments, startAssignOrderToTruck} = useTrucksStore();
     const {orders} = useOrdersStore();
 
     const [selectedOrderId, setSelectedOrderId] = useState('');
@@ -107,6 +108,8 @@ export const FormAssignmnetOrderToTruck = () => {
                 </div>
             )}
         </div>
+
+        <TableTrackAssignments orderTruckAssignments={orderTruckAssignments}/>
     </div>
   )
 }
