@@ -135,6 +135,9 @@ export const SideBar = () => {
                     </button>
                     <ul className="sub-menu">
                         <div>
+                            <li className={activeTab === '/orderadministration' ? 'active' : ''}>
+                                <Link to={'orderadministration'}>Administrar Ordenes</Link>
+                            </li>
                             <li className={activeTab === '/addorder' ? 'active' : ''}>
                                 <Link to={'addorder'}>Agregar Orden</Link>
                             </li>
