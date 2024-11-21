@@ -4,6 +4,7 @@ import { showErrorAlert } from "../helpers";
 
 
 const initialFurnitureForm = {
+    furnitureId: '',
     type: '',
     brand: '',
     color: '',
@@ -13,6 +14,7 @@ const initialFurnitureForm = {
 };
   
 const furnitureValidations = {
+    furnitureId: [(value) => value.trim() !== '', 'El ID es obligatorio'],
     type: [(value) => value.trim() !== '', 'El tipo es obligatorio'],
     brand: [(value) => value.trim() !== '', 'La marca es obligatoria'],
     color: [(value) => value.trim() !== '', 'El color es obligatorio'],
@@ -23,6 +25,7 @@ const furnitureValidations = {
 
 export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen}) => {
     const {
+        furnitureId,
         type,
         brand,
         color,
@@ -35,7 +38,7 @@ export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen}) =
     } = useForm(initialFurnitureForm, furnitureValidations);
 
     const newForniture = ( ) => {
-        return { type, brand, color, dimension, quantity: Number(quantity), buildTime };
+        return { furnitureId, type, brand, color, dimension, quantity: Number(quantity), buildTime };
     }
 
     const handleSendNewForniture = () => {
@@ -54,6 +57,19 @@ export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen}) =
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h3 className="font-bold text-xl mb-4">Agregar Mueble</h3>
         <form onSubmit={(e) => e.preventDefault()}>
+          <div className="mb-4">
+            <label htmlFor="furnitureId" className="block font-semibold mb-2">
+              ID del Mueble
+            </label>
+            <input
+              type="text"
+              name="furnitureId"
+              id="furnitureId"
+              value={furnitureId}
+              onChange={onFurnitureChange}
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+          </div>
           <div className="mb-4">
             <label htmlFor="type" className="block font-semibold mb-2">
               Tipo del Mueble

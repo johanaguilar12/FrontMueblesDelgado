@@ -8,3 +8,4 @@ export * from './RegisterTruckForm';
 export * from './Sidebar';
 export * from './deliveryAdmin';
 export * from './inventoryAdmin';
+export * from './orderAdmin';

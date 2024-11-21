@@ -109,6 +109,8 @@ export const AddPackingListForm = () => {
             {furnitureList.map((furniture, index) => (
               <li key={index} className="flex justify-between items-center border my-3">
                 <div>
+                    <span>{`ID: ${furniture.furnitureId}`}</span>
+                    <br />
                     <span>{`Tipo: ${furniture.type}`}</span>
                     <br />
                     <span>{`Marca: ${furniture.brand}`}</span>

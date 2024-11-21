@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import mueblesDelgadoApi from "../api/mueblesDelgadoApi";
 import { onSetOrders } from "../store";
+import { useAdmin } from "./useAdmin";
 
 
 export const useOrdersStore = () => {
     const { orders } = useSelector((state) => state.orders);
     const dispatch = useDispatch();
+    const {startCommand,finishedCommand} = useAdmin();
 
     const startGetOrders = async () => {
         try {
@@ -20,11 +22,14 @@ export const useOrdersStore = () => {
 
     const startCreateOrder = async (order) => {
         try {
+            // startCommand();
             const { data } = await mueblesDelgadoApi.post("/orders", order);
-            console.log("Pedido creado exitosamente:", data);
+            console.log("Pedido creado exitosamente:", data.order);
 
             startGetOrders();
+            // finishedCommand();
         } catch (error) {
+            // finishedCommand();
             const message = error.response?.data?.message || "Error al crear el pedido";
             console.error("startCreateOrder Error:", message);
             throw new Error(message);

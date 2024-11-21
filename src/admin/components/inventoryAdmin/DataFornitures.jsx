@@ -11,6 +11,8 @@ export const DataFornitures = ({packinglist, setIsFurnituresModalOpen}) => {
                         {packinglist.products.map((furniture, furnitureIndex) => (
                             <li key={`${furniture.type}-${furniture.brand}-${furnitureIndex}`} className="flex justify-between items-center border my-4">
                                 <div>
+                                    <span>{`ID: ${furniture?.furnitureId}`}</span>
+                                    <br />
                                     <span>{`Tipo: ${furniture.type}`}</span>
                                     <br />
                                     <span>{`Marca: ${furniture.brand}`}</span>

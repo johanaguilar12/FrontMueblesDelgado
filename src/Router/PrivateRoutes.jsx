@@ -4,7 +4,7 @@ import { useAuthStore } from "../hooks/useAuthStore";
 import { LoadingElement } from "../helpers/LoadingElement";
 import { useDriversStore, useTrucksStore } from "../hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { onSetTrucks, onSetDrivers, onSetPackingLists, onSetOrders, onSetOrderTruckAssignments, onSetAssignments } from "../store";
+import { onSetTrucks, onSetDrivers, onSetPackingLists, onSetOrders, onSetOrderTruckAssignments, onSetAssignments, onSetFornitures } from "../store";
 import { useAdmin } from "../hooks/useAdmin";
 
 export const PrivateRoutes = ({ children }) => {
@@ -244,6 +244,45 @@ export const PrivateRoutes = ({ children }) => {
       },
     },
   ];
+
+  const furniture = [
+    {
+      furnitureId: "xasdas",
+      type: "Mesa",
+      brand: "IKEA",
+      color: "Blanco",
+      dimension: { width: 120, height: 75, depth: 60 },
+      quantity: 10,
+      buildTime: 45, // en minutos
+    },
+    {
+      furnitureId: "xasda",
+      type: "Silla",
+      brand: "Herman Miller",
+      color: "Negro",
+      dimension: { width: 50, height: 100, depth: 50 },
+      quantity: 20,
+      buildTime: 30, // en minutos
+    },
+    {
+      furnitureId: "xasd",
+      type: "Cama",
+      brand: "Sealy",
+      color: "Gris",
+      dimension: { width: 200, height: 50, depth: 180 },
+      quantity: 2,
+      buildTime: 90, // en minutos
+    },
+    {
+      furnitureId: "xas",
+      type: "Buró",
+      brand: "IKEA",
+      color: "Nogal",
+      dimension: { width: 40, height: 60, depth: 40 },
+      quantity: 4,
+      buildTime: 20, // en minutos
+    },
+  ];
   
 
   // const { status, checkAuthToken } = useAuthStore();
@@ -259,6 +298,7 @@ export const PrivateRoutes = ({ children }) => {
     dispatch(onSetOrders(Orders));
     dispatch(onSetOrderTruckAssignments(OrderTruckAssignment));
     dispatch(onSetAssignments(assignmentsEjemplo));
+    dispatch(onSetFornitures(furniture));
   }, [])
   
 

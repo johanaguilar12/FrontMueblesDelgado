@@ -4,7 +4,7 @@ import { onSetDrivers } from "../store";
 
 
 export const useInventoryStore = () => {
-    const { packinglists } = useSelector((state) => state.inventory);
+    const { packinglists, furnitures } = useSelector((state) => state.inventory);
     const dispatch = useDispatch();
 
     // const startGetDrivers = async () => {
@@ -22,6 +22,7 @@ export const useInventoryStore = () => {
   return {
     //*Propiedades
     packinglists,
+    furnitures,
 
     //*Métodos
 

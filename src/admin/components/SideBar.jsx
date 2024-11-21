@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronLeft, faClipboardList, faHome, faRoute, faSignOut, faTruck, faUserShield, faWarehouse } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronLeft, faClipboardList, faHome, faListAlt, faRoute, faSignOut, faTruck, faUserShield, faWarehouse } from "@fortawesome/free-solid-svg-icons";
 import './SideBar.css';
 import { useAuthStore } from "../../hooks";
 
@@ -123,6 +123,20 @@ export const SideBar = () => {
                             </li>
                             <li className={activeTab === '/registerdriver' ? 'active' : ''}>
                                 <Link to={'registerdriver'}>Dar de alta Chófer</Link>
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+                <li>
+                    <button onClick={toggleSubMenu} className="dropdown-btn" id="dropdown-btn">
+                        <FontAwesomeIcon icon={faListAlt} className="sizeSVG" />
+                        <span>Ordenes</span>
+                        <FontAwesomeIcon icon={faChevronDown} className="sizeSVG" />
+                    </button>
+                    <ul className="sub-menu">
+                        <div>
+                            <li className={activeTab === '/addorder' ? 'active' : ''}>
+                                <Link to={'addorder'}>Agregar Orden</Link>
                             </li>
                         </div>
                     </ul>
