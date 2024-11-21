@@ -55,7 +55,6 @@ export const TableAssignDriver = ({
                   onClick={() => handleAssignDriver(assignment.deliveryTruck.id)}
                   className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 w-[36px] h-[36px] flex items-center justify-center"
                   title="Agregar conductor"
-                  // disabled={!truck.isAvailable}
                 >
                   <FontAwesomeIcon icon={faPray} />
                 </button>

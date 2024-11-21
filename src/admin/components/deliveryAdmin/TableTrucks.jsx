@@ -35,7 +35,7 @@ export const TableTrucks = ({trucks = [{ id: 0, trackingNumber: "", capacity: 0,
           await startAssignDriverToTruck(selectedTruck.trackingNumber, formData.driverName);
   
           setShowForm(false);
-          showSuccess("Conductor asiganado correctamente")
+          showSuccess("Conductor asiganado correctamente");
         } catch (error) {
           setShowForm(false);
           showErrorAlert(error.message);

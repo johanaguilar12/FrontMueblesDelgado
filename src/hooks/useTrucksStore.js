@@ -37,24 +37,21 @@ export const useTrucksStore = () => {
 
     const startAssignOrderToTruck = async (orderId, trackingNumber) => {
         try {
-            const numericOrderId = parseInt(orderId, 10);
-            const numericTrackingNumber = parseInt(trackingNumber, 10);
-    
-            if (isNaN(numericOrderId) || isNaN(numericTrackingNumber)) {
-                throw new Error("Los valores de orderId y trackingNumber deben ser números.");
-            }
+            startCommand();
+            const numericOrderId = parseInt(orderId);
+            const numericTrackingNumber = parseInt(trackingNumber);
 
             const { data } = await mueblesDelgadoApi.post("/logistics/assign", {
                 orderId: numericOrderId,
                 trackingNumber: numericTrackingNumber,
             });
-            console.log("Camiones actualizados:", data);
+
+            startGetTrucks();
+            finishedCommand();
+            return data;
         } catch (error) {
-            console.error(
-                "Error al registrar los camiones:",
-                error.response?.data || error.message
-            );
-            throw new Error("Error al actualizar los camiones");
+            finishedCommand();
+            throw new Error("Error al asignar la Orden");
         }
     };
 

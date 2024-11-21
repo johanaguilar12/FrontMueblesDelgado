@@ -125,7 +125,7 @@ export const SideBar = () => {
                         </div>
                     </ul>
                 </li>
-                <li>
+                {/* <li>
                     <button onClick={toggleSubMenu} className="dropdown-btn" id="dropdown-btn">
                         <FontAwesomeIcon icon={faUserShield} className="sizeSVG" />
                         <span>Administrador</span>
@@ -141,7 +141,7 @@ export const SideBar = () => {
                             </li>
                         </div>
                     </ul>
-                </li>
+                </li> */}
                 <li>
                     <button className="dropdown-btn">
                         <FontAwesomeIcon icon={faSignOut} color="red" className="sizeSVG" />

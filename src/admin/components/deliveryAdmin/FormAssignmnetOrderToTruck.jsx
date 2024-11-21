@@ -3,6 +3,7 @@ import { useOrdersStore, useTrucksStore } from "../../../hooks";
 import { faEdit, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { TableTrackAssignments } from "./TableTrackAssignments";
+import { showErrorAlert, showSuccess } from "../helpers";
 
 
 export const FormAssignmnetOrderToTruck = () => {
@@ -22,17 +23,22 @@ export const FormAssignmnetOrderToTruck = () => {
 
     const handleAssignOrder = ( truckId = '' ) => {
         const truck = findTruck(truckId);
-        setSelectedTruck(truck); // Ahora selectedTruck es un objeto, no un array
+        setSelectedTruck(truck);
         setShowFormSetOrder(true);
     }
 
-    const handleFormAssingOrder = ( e ) => {
+    const handleFormAssingOrder = async ( e ) => {
         e.preventDefault();
         setSelectedOrderId(formData.orderId);
 
-        console.log(selectedOrderId, selectedTruck.id);
-        // startAssignOrderToTruck(selectedOrderId, selectedTruck.id);
-        setShowFormSetOrder(false);
+        try {
+            await startAssignOrderToTruck(selectedOrderId, selectedTruck.id);
+            setShowFormSetOrder(true);
+            showSuccess("Orden Asignada al Camión correctamente");
+        } catch (error) {
+            setShowFormSetOrder(true);
+            showErrorAlert(error.message);
+        }
     }
 
   return (
