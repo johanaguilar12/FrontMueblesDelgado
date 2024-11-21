@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TableRoutes } from "../components";
 
-export const RouteCalculator = () => {
+export const DeliveryRoutes = () => {
 
   const routes = [
     {id:1, routeNumber: "R001", departureDate: "2024-11-21", duration: "6 horas"},

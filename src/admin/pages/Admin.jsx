@@ -66,7 +66,7 @@ export const Admin = () => {
             )}
         </div>
         <div className="text-right mt-6">
-            <Link to="RouteCalculator" className="text-sm text-customBlue hover:underline">
+            <Link to="deliveryroutes" className="text-sm text-customBlue hover:underline">
                     ver más
             </Link>
         </div>

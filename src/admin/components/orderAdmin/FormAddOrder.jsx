@@ -57,10 +57,6 @@ export const FormAddOrder = () => {
         }
         setSelectedFurnitures(selected);
     };
-    useEffect(() => {
-        startGetOrders();
-    }, [])
-    
 
     const handleFilterSelected = (furniture) => {
         return !furnitureList.some((assignedFurniture) => assignedFurniture.furnitureId === furniture.furnitureId);

@@ -85,10 +85,10 @@ export const SideBar = () => {
                         <span>Inicio</span>
                     </Link>
                 </li>
-                <li className={activeTab === '/routecalculator' ? 'active' : ''}>
-                    <Link to={'routecalculator'}>
+                <li className={activeTab === '/deliveryroutes' ? 'active' : ''}>
+                    <Link to={'deliveryroutes'}>
                         <FontAwesomeIcon icon={faRoute} className="sizeSVG" />
-                        <span>Calcular Ruta</span>
+                        <span>Rutas de Entrega</span>
                     </Link>
                 </li>
                 <li className={activeTab === '/inventoryadmin' ? 'active' : ''}>
