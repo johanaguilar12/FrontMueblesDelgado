@@ -3,8 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronLeft, faClipboardList, faHome, faRoute, faSignOut, faTruck, faUserShield, faWarehouse } from "@fortawesome/free-solid-svg-icons";
 import './SideBar.css';
+import { useAuthStore } from "../../hooks";
 
 export const SideBar = () => {
+    const {startLogout} = useAuthStore();
     const location = useLocation();
     const activeTab = location.pathname.replace('/admin/panel','');
 
@@ -125,7 +127,7 @@ export const SideBar = () => {
                         </div>
                     </ul>
                 </li>
-                {/* <li>
+                <li>
                     <button onClick={toggleSubMenu} className="dropdown-btn" id="dropdown-btn">
                         <FontAwesomeIcon icon={faUserShield} className="sizeSVG" />
                         <span>Administrador</span>
@@ -141,9 +143,9 @@ export const SideBar = () => {
                             </li>
                         </div>
                     </ul>
-                </li> */}
+                </li>
                 <li>
-                    <button className="dropdown-btn">
+                    <button className="dropdown-btn" onClick={startLogout}>
                         <FontAwesomeIcon icon={faSignOut} color="red" className="sizeSVG" />
                         <span>Cerrar Sesión</span>
                     </button>

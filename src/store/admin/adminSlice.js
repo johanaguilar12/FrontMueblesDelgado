@@ -4,6 +4,7 @@ export const adminSlice = createSlice({
     name: 'admin',
     initialState: {
         status: "waiting",
+        accounts: [],
     },
     reducers: {
         onStartingCommand: (state, {payload} ) => {
@@ -12,8 +13,11 @@ export const adminSlice = createSlice({
         onFinishedCommand: (state, {payload} ) => {
             state.status = "finished";
         },
+        onSetAccounts: (state, {payload} ) => {
+            state.accounts = payload;
+        },
     }
 });
 
 // Action creators are generated for each case reducer function
-export const { onStartingCommand, onFinishedCommand } = adminSlice.actions;    
+export const { onStartingCommand, onFinishedCommand, onSetAccounts } = adminSlice.actions;    

@@ -3,7 +3,7 @@ import { onFinishedCommand, onStartingCommand } from "../store";
 
 
 export const useAdmin = () => {
-    const { status } = useSelector((state) => state.admin);
+    const { status, accounts } = useSelector((state) => state.admin);
     const dispatch = useDispatch();
 
     const startCommand = (  ) => {
@@ -17,6 +17,7 @@ export const useAdmin = () => {
   return {
     //*Propiedades
     status,
+    accounts,
 
     //*Métodos
     startCommand,

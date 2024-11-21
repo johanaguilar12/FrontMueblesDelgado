@@ -4,6 +4,9 @@ import { faChartLine, faPlus, faBell } from '@fortawesome/free-solid-svg-icons';
 
 
 export const Admin = () => {
+
+  // Aqui puede ir js
+
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="container__admin shadow-custom w-full max-w-6xl">

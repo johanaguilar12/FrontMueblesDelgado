@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import mueblesDelgadoApi from "../api/mueblesDelgadoApi";
-import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store";
+import { clearErrorMessage, onChecking, onLogin, onLogout, onSetAccounts } from "../store";
+import { useAdmin } from "./useAdmin";
 
 export const useAuthStore = () => {
-
+  const {startCommand, finishedCommand} = useAdmin();
   const { status, user, errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -12,7 +13,7 @@ export const useAuthStore = () => {
     try {
       const { data } = await mueblesDelgadoApi.post("/auth", {
         name: username,
-        password,            //! Cambiar nombres dependiendo de como se reciba del spring
+        password,
       });
       localStorage.setItem("token", data.token);
       dispatch(onLogin(data.user));
@@ -43,6 +44,48 @@ export const useAuthStore = () => {
     }
   }
 
+  const startRegisterAccount = async ( newAccount ) => {
+    try {
+      startCommand();
+      const { data } = await mueblesDelgadoApi.post("/auth/register", newAccount);
+      startGetAccounts();
+      
+      finishedCommand();
+    } catch (error) {
+      finishedCommand();
+      console.log(error);
+      throw new Error("Error al registrar al Conductor");
+    }
+  }
+
+  const startGetAccounts = async () => {
+    try {
+      startCommand();
+      const { data } = await mueblesDelgadoApi.get("/auth/admins");
+      dispatch(onSetAccounts(data.admins));
+      
+      finishedCommand();
+    } catch (error) {
+      finishedCommand();
+      console.log(error);
+      throw new Error("Error al registrar al Conductor");
+    }
+  }
+
+  const startDeleteAccount = async (id) => {
+    try {
+      startCommand();
+      const { data } = await mueblesDelgadoApi.delete(`/auth/admins/${id}`);
+      startGetAccounts();
+      
+      finishedCommand();
+    } catch (error) {
+      finishedCommand();
+      console.log(error);
+      throw new Error("Error al registrar al Conductor");
+    }
+  }
+
   const startLogout = () => {
     localStorage.clear();
     dispatch(onLogout());
@@ -58,5 +101,8 @@ export const useAuthStore = () => {
     startLogin,
     checkAuthToken,
     startLogout,
+    startRegisterAccount,
+    startDeleteAccount,
+    startGetAccounts,
   };
 };
