@@ -5,13 +5,12 @@ import { showErrorAlert } from "../../auth/components";
 
 const initialFormRegisterDriver = {
   trackingNumber: '',
-  capacity: '',
+  capacity: 6500,
   mileage: '',
 }
 
 const formValidationsRegisterDriver = {
   trackingNumber: [(value) => value.trim() !== '', 'El número de rastreo es obligatorio'],
-  capacity: [(value) => value.trim() !== '', 'La capacidad es obligatoria'],
   mileage: [(value) => value.trim() !== '', 'El kilometraje es obligatorio'],
 }
 
@@ -30,7 +29,7 @@ export const RegisterTruckForm = () => {
     try {
       const truck = {
         trackingNumber,
-        capacity,
+        capacity: capacity || 6500, // Si no está definido, usa el valor por defecto
         mileage,
       };
 
@@ -62,23 +61,6 @@ export const RegisterTruckForm = () => {
               id="trackingNumber"
               value={trackingNumber}
               onChange={onInputChange}
-              className="w-full px-4 py-2 border border-lineclr rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlueLight"
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="capacity"
-              className="block text-baseclr font-semibold mb-2"
-            >
-              Capacidad
-            </label>
-            <input
-              type="number"
-              name="capacity"
-              id="capacity"
-              value={capacity}
-              onChange={onInputChange}
-              onKeyDown={onlyNumbersOnKeyDown}
               className="w-full px-4 py-2 border border-lineclr rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlueLight"
             />
           </div>
