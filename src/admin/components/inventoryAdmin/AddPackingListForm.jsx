@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm, useInventoryStore } from "../../../hooks";
+import { useForm, useInventoryStore, useOrdersStore } from "../../../hooks";
 import { isValidDate, showErrorAlert } from "../helpers";
 import { FormAddForniture } from './FormAddForniture';
 
@@ -18,6 +18,7 @@ export const AddPackingListForm = () => {
   const [ordersID, setOrdersID] = useState([]);
   const [isFurnitureFormOpen, setIsFurnitureFormOpen] = useState(false);
   const {startAddPackingList} = useInventoryStore();
+  const {setPackingListOrderID} = useOrdersStore();
 
   const { folio, arrivalDate, onInputChange, isFormValid, onResetForm} = useForm(initialFormPackingList, formValidationsPackingList);
 
@@ -28,6 +29,12 @@ export const AddPackingListForm = () => {
 
   const handleRemoveFurniture = (index) => {
     setFurnitureList((prevList) => prevList.filter((_, i) => i !== index));
+  };
+
+  const extractUniqueOrderIDs = (furnitureList) => {
+    const orderIDs = furnitureList.map(furniture => furniture.orderID);
+    const uniqueOrderIDs = [...new Set(orderIDs)];
+    return uniqueOrderIDs;
   };
 
   const onSubmitFormPackingList = async (e) => {
@@ -56,9 +63,12 @@ export const AddPackingListForm = () => {
         arrivalDate,
       }
 
-      console.log(newPackingList);
+      // console.log(furnitureList);
 
       await startAddPackingList(newPackingList);
+
+      const uniqueOrderIDs = extractUniqueOrderIDs(furnitureList);
+      setPackingListOrderID(uniqueOrderIDs);
 
       setFurnitureList([]);
       setOrdersID([]);
@@ -135,7 +145,7 @@ export const AddPackingListForm = () => {
                     <br />
                     <span>{`Color: ${furniture.color}`}</span>
                     <br />
-                    <span>{`Dimensión: ${furniture.dimension}`}</span>
+                    <span>{`Dimensión: largo: ${furniture.dimension.length} x alto: ${furniture.dimension.height} x ancho: ${furniture.dimension.width}`}</span>
                     <br />
                     <span>{`Cantidad: ${furniture.quantity}`}</span>
                     <br />

@@ -1,18 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import mueblesDelgadoApi from "../api/mueblesDelgadoApi";
-import { onSetOrders } from "../store";
+import { onSetOrders, onSetPackingListOrderID } from "../store";
 import { useAdmin } from "./useAdmin";
 
 
 export const useOrdersStore = () => {
-    const { orders } = useSelector((state) => state.orders);
+    const { orders, packingListOrderID } = useSelector((state) => state.orders);
     const dispatch = useDispatch();
     const {startCommand,finishedCommand} = useAdmin();
 
     const startGetOrders = async () => {
         try {
             const { data } = await mueblesDelgadoApi.get("/orders");
-            dispatch(onSetOrders(data.orders));
+            dispatch(onSetOrders(data));
         } catch (error) {
             const message = error.response?.data?.message || "Error al obtener los pedidos";
             console.error("startGetOrders Error:", message);
@@ -73,9 +73,14 @@ export const useOrdersStore = () => {
         }
     };
 
+    const setPackingListOrderID = (ordersId = []) => {
+        dispatch(onSetPackingListOrderID(ordersId));
+    }
+
     return {
         //* Propiedades
         orders,
+        packingListOrderID,
 
         //* Métodos
         startGetOrders,
@@ -83,5 +88,6 @@ export const useOrdersStore = () => {
         startUpdateOrder,
         startRemoveOrder,
         startSetOrders,
+        setPackingListOrderID,
     };
 }

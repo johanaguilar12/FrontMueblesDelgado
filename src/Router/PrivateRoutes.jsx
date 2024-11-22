@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthStore } from "../hooks/useAuthStore";
 import { LoadingElement } from "../helpers/LoadingElement";
-import { useDriversStore, useInventoryStore, useTrucksStore } from "../hooks";
+import { useDriversStore, useInventoryStore, useOrdersStore, useTrucksStore } from "../hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { onSetTrucks, onSetDrivers, onSetPackingLists, onSetOrders, onSetOrderTruckAssignments, onSetAssignments, onSetFornitures } from "../store";
 import { useAdmin } from "../hooks/useAdmin";
@@ -285,71 +285,47 @@ export const PrivateRoutes = ({ children }) => {
   ];
   
 
-  // const { status, checkAuthToken } = useAuthStore();
+  const { status, checkAuthToken } = useAuthStore();
   const [isReady, setIsReady] = useState(false);
   const {status: statusCommand} = useAdmin();
   const {startGetPackingLists, startGetFurnitures} = useInventoryStore();
   const {startGetAccounts} = useAuthStore();
   const {startGetDrivers, startGetAssignments} = useDriversStore();
   const {startGetTrucks} = useTrucksStore();
+  const {startGetOrders} = useOrdersStore();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // checkAuthToken();
-    // dispatch(onSetTrucks(trucksEjemplo));
-    // dispatch(onSetDrivers(drivers));
-    // dispatch(onSetPackingLists(PackingList));
-    startGetPackingLists();
-    startGetAccounts();
-    startGetDrivers();
-    startGetTrucks();
-    startGetAssignments();
-    startGetFurnitures();
-    dispatch(onSetOrders(Orders));
-    // dispatch(onSetOrderTruckAssignments(OrderTruckAssignment));
-    // dispatch(onSetAssignments(assignmentsEjemplo));
-    // dispatch(onSetFornitures(furniture));
+    const initializeData = async () => {
+      try {
+        await Promise.all([
+          checkAuthToken(),
+          startGetPackingLists(),
+          startGetAccounts(),
+          startGetDrivers(),
+          startGetTrucks(),
+          startGetAssignments(),
+          startGetFurnitures(),
+          startGetOrders(),
+        ]);
+        setIsReady(true);
+      } catch (error) {
+        console.error("Error during initialization:", error);
+      }
+    };
+  
+    initializeData();
   }, []);
-
-  // useEffect(() => {
-  //   const initializeData = async () => {
-  //     try {
-  //       await Promise.all([
-  //         checkAuthToken(),
-  //         startGetPackingLists(),
-  //         startGetAccounts(),
-  //         startGetDrivers(),
-  //         startGetTrucks(),
-  //         startGetAssignments(),
-  //         startGetFurnitures(),
-  //       ]);
-  //       setIsReady(true);
-  //     } catch (error) {
-  //       console.error("Error during initialization:", error);
-  //     }
-  //   };
-  
-  //   initializeData();
-  // }, []);
   
 
 
-  // if (!isReady || status === "checking" || statusCommand === "starting") {
-  //   return <LoadingElement />;
-  // }
-  
-  if (statusCommand === "starting") {
+  if (!isReady || status === "checking" || statusCommand === "starting") {
     return <LoadingElement />;
   }
   
 
-
-
-
   //Si esta autenticado muestra el panel de administrador y si no esta autenticado redirige al login
-
-  const status = "authenticated";
 
   return status === "authenticated" ? (
     children

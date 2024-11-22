@@ -18,7 +18,7 @@ export const DataFurnituresOrders = ({selectedOrder, setIsFurnituresOrderModalOp
                                     <br />
                                     <span>{`Color: ${furniture.color}`}</span>
                                     <br />
-                                    <span>{`Dimensión: largo: ${furniture.dimension.depth} x alto: ${furniture.dimension.height} x ancho: ${furniture.dimension.width}`}</span>
+                                    <span>{`Dimensión: largo: ${furniture.dimension.length} x alto: ${furniture.dimension.height} x ancho: ${furniture.dimension.width}`}</span>
                                     <br />
                                     <span>{`Cantidad: ${furniture.quantity}`}</span>
                                     <br />

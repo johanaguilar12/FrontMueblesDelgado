@@ -56,8 +56,17 @@ export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen, or
       }
     }
 
+    const createOrderByID = ( orderid ) => {
+      return {
+        orderid,
+        destination: '',
+        eliveryDate: '',
+        orderContent: '',
+      }
+    }
+
     const newForniture = () => {
-      return { furnitureId, orderID: isAddingNewOrderID ? newOrderID : orderID, type, brand, color, dimension: transformStringToDimension(dimension), quantity: Number(quantity), buildTime };
+      return { furnitureId, type, brand, color, dimension: transformStringToDimension(dimension), quantity: Number(quantity), buildTime, order: isAddingNewOrderID ? createOrderByID(newOrderID) : orderID };
     }
 
   const handleSendNewForniture = () => {
