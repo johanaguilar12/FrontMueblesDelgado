@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
 import mueblesDelgadoApi from "../api/mueblesDelgadoApi";
-import { onSetFornitures, onSetPackingLists } from "../store";
+import { onSetFornitures, onSetPackingLists, onSetRoutes } from "../store";
 import { useAdmin } from "./useAdmin";
 
 
 export const useLogisticRoute = () => {
-    // const { packinglists, furnitures } = useSelector((state) => state.inventory);
+    const { routes } = useSelector((state) => state.orders);
     const {startCommand, finishedCommand} = useAdmin();
     const dispatch = useDispatch();
 
@@ -14,8 +14,9 @@ export const useLogisticRoute = () => {
           startCommand();
           
           const { data } = await mueblesDelgadoApi.post("/logistics/planRoutes", orders);
-          console.log(data)
-        //   Asignar al store
+
+          dispatch(onSetRoutes(data));
+
           finishedCommand();
         } catch (error) {
           finishedCommand();
@@ -29,8 +30,7 @@ export const useLogisticRoute = () => {
 
   return {
     //*Propiedades
-    // packinglists,
-    // furnitures,
+    routes,
 
     //*Métodos
     startPlanRoutes,

@@ -29,7 +29,7 @@ export const TableRoutes = ({
     }, [orders]);
 
     const handleGenerateRoute = async ( e ) => {
-        if (filteredOrders.length < 2) {
+        if (filteredOrders.length < 1) {
             showErrorAlert("No hay suficientes Ordenes");
         }
         

@@ -115,9 +115,6 @@ export const SideBar = () => {
                             <li className={activeTab === '/deliveryadmin' ? 'active' : ''}>
                                 <Link to={'deliveryadmin'}>Gestión de Flota</Link>
                             </li>
-                            <li className={activeTab === '/orderassignment' ? 'active' : ''}>
-                                <Link to={'orderassignment'}>Asignación de Orden</Link>
-                            </li>
                             <li className={activeTab === '/registertruck' ? 'active' : ''}>
                                 <Link to={'registertruck'}>Dar de alta Camión</Link>
                             </li>

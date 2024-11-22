@@ -5,6 +5,7 @@ export const ordersSlice = createSlice({
     initialState: {
         orders: [],
         packingListOrderID: [],
+        routes: [],
     },
     reducers: {
         onSetOrders: (state, { payload } ) => {
@@ -13,8 +14,11 @@ export const ordersSlice = createSlice({
         onSetPackingListOrderID: (state, { payload } ) => {
             state.packingListOrderID = payload;
         },
+        onSetRoutes: (state, { payload } ) => {
+            state.routes = payload;
+        },
     }
 });
 
 // Action creators are generated for each case reducer function
-export const { onSetOrders, onSetPackingListOrderID } = ordersSlice.actions;
+export const { onSetOrders, onSetPackingListOrderID, onSetRoutes } = ordersSlice.actions;
