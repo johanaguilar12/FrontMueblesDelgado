@@ -26,8 +26,6 @@ export const TableAssignDriver = ({
   };
 
 
-
-
   return (
     <div className="container__admin shadow-custom w-full max-w-6xl">
       <h2 className="text-lg md:text-2xl font-bold text-center text-customBlue">
@@ -45,7 +43,7 @@ export const TableAssignDriver = ({
         <div> {/** tbody */}
           {assignments?.map((assignment) => (
             <div
-              key={assignment.deliveryTruck.id}
+              key={`${assignment.assignmentId} -- ${assignment.deliveryTruck.trackingNumber} -- ${assignment.truckDriver.name}`}
               className="grid grid-cols-2 sm:grid-cols-3 text-center border [&>p]:border"
             > {/** tr */}
             <p>{assignment.deliveryTruck.trackingNumber}</p>

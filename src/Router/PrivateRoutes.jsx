@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthStore } from "../hooks/useAuthStore";
 import { LoadingElement } from "../helpers/LoadingElement";
-import { useDriversStore, useTrucksStore } from "../hooks";
+import { useDriversStore, useInventoryStore, useTrucksStore } from "../hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { onSetTrucks, onSetDrivers, onSetPackingLists, onSetOrders, onSetOrderTruckAssignments, onSetAssignments, onSetFornitures } from "../store";
 import { useAdmin } from "../hooks/useAdmin";
@@ -288,22 +288,28 @@ export const PrivateRoutes = ({ children }) => {
   // const { status, checkAuthToken } = useAuthStore();
   // const { drivers } = useSelector((state) => state.drivers);
   const {status: statusCommand} = useAdmin();
+  const {startGetPackingLists, startGetFurnitures} = useInventoryStore();
+  const {startGetAccounts} = useAuthStore();
+  const {startGetDrivers, startGetAssignments} = useDriversStore();
+  const {startGetTrucks} = useTrucksStore();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(onSetTrucks(trucksEjemplo));
-    dispatch(onSetDrivers(drivers));
-    dispatch(onSetPackingLists(PackingList));
+    // dispatch(onSetTrucks(trucksEjemplo));
+    // dispatch(onSetDrivers(drivers));
+    // dispatch(onSetPackingLists(PackingList));
+    startGetPackingLists();
+    startGetAccounts();
+    startGetDrivers();
+    startGetTrucks();
+    startGetAssignments();
+    startGetFurnitures();
     dispatch(onSetOrders(Orders));
     dispatch(onSetOrderTruckAssignments(OrderTruckAssignment));
-    dispatch(onSetAssignments(assignmentsEjemplo));
-    dispatch(onSetFornitures(furniture));
-  }, [])
-  
-
-  // const {drivers} = useDriversStore();
-  // const {trucks} = useTrucksStore();
+    // dispatch(onSetAssignments(assignmentsEjemplo));
+    // dispatch(onSetFornitures(furniture));
+  }, []);
 
   // useEffect(() => {
   //   checkAuthToken();

@@ -42,9 +42,22 @@ export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen, or
     const [isAddingNewOrderID, setIsAddingNewOrderID] = useState(false);
     const [newOrderID, setNewOrderID] = useState('');
 
+    const transformStringToDimension = ( dimensionString = '') => {
+      const dimensionSplit = dimensionString.split(/[,|-]/);
+
+      if (dimensionSplit.length !== 3) {
+        showErrorAlert('Ingresa una dimensión valida');
+      }
+      
+      return {
+        length: dimensionSplit[0],
+        height: dimensionSplit[1],
+        width: dimensionSplit[2],
+      }
+    }
 
     const newForniture = () => {
-      return { furnitureId, orderID: isAddingNewOrderID ? newOrderID : orderID, type, brand, color, dimension, quantity: Number(quantity), buildTime };
+      return { furnitureId, orderID: isAddingNewOrderID ? newOrderID : orderID, type, brand, color, dimension: transformStringToDimension(dimension), quantity: Number(quantity), buildTime };
     }
 
   const handleSendNewForniture = () => {
@@ -84,36 +97,36 @@ export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen, or
             <label htmlFor={isAddingNewOrderID ? 'newOrderID' : 'orderID'} className="block font-semibold mb-2">
                 ID de la orden
             </label>
-                        {isAddingNewOrderID ? (
-                            <input
-                                type="text"
-                                name="newOrderID"
-                                id="newOrderID"
-                                value={newOrderID}
-                                onChange={(e) => setNewOrderID(e.target.value)}
-                                className="w-full px-4 py-2 border rounded-lg"
-                            />
-                        ) : (
-                          <select
-                          name="orderID"
-                          id="orderID"
-                          value={orderID}
-                          onChange={(e) => {
-                              if (e.target.value === 'new') {
-                                  setIsAddingNewOrderID(true);
-                              } else {
-                                  onFurnitureChange(e);
-                              }
-                          }}
-                          className="w-full px-4 py-2 border rounded-lg"
-                      >
-                          <option value="" disabled>Seleccionar ID de la orden</option>
-                          {ordersID.map((id) => (
-                              <option key={id} value={id}>{id}</option>
-                          ))}
-                          <option value="new">Agregar nuevo ID de la orden</option>
-                      </select>
-                  )}
+            {isAddingNewOrderID ? (
+                <input
+                    type="text"
+                    name="newOrderID"
+                    id="newOrderID"
+                    value={newOrderID}
+                    onChange={(e) => setNewOrderID(e.target.value)}
+                    className="w-full px-4 py-2 border rounded-lg"
+                />
+            ) : (
+              <select
+                name="orderID"
+                id="orderID"
+                value={orderID}
+                onChange={(e) => {
+                    if (e.target.value === 'new') {
+                        setIsAddingNewOrderID(true);
+                    } else {
+                        onFurnitureChange(e);
+                    }
+                }}
+                className="w-full px-4 py-2 border rounded-lg"
+              >
+                <option value="" disabled>Seleccionar ID de la orden</option>
+                {ordersID.map((id) => (
+                    <option key={id} value={id}>{id}</option>
+                ))}
+                <option value="new">Agregar nuevo ID de la orden</option>
+              </select>
+          )}
           </div>
           <div className="mb-4">
             <label htmlFor="type" className="block font-semibold mb-2">

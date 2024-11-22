@@ -20,9 +20,9 @@ export const TableDrivers = ({drivers = [{ id: 0, name: "", license: ""}]}) => {
 
             <div> {/** tbody */}
                 {drivers?.map((driver) => (
-                    <div key={driver.id} className="grid grid-cols-2 sm:grid-cols-3 text-center border [&>p]:border">
+                    <div key={driver.licenseNumber} className="grid grid-cols-2 sm:grid-cols-3 text-center border [&>p]:border">
                         <p>{driver.name}</p>
-                        <p>{driver.license}</p>
+                        <p>{driver.licenseNumber}</p>
                         <div className="flex justify-center items-center gap-2">
                             <button
                                 onClick={() => handleAssignDriver(truck.id)}

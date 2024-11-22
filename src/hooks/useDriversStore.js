@@ -12,7 +12,7 @@ export const useDriversStore = () => {
   const startGetDrivers = async () => {
       try {
           const {data} = await mueblesDelgadoApi.get("/delivery/drivers");
-          dispatch(onSetDrivers(data.drivers));
+          dispatch(onSetDrivers(data));
       } catch (error) {
           console.log(error);
           throw new Error("Error al obtener a los Conductores");
@@ -35,10 +35,16 @@ export const useDriversStore = () => {
   }
 
   const startAssignDriverToTruck = async (trackingNumber, name) => {
+    console.log(trackingNumber, name);
     try {
         startCommand();
 
-        await mueblesDelgadoApi.post("/assign", { p_trackingNumber: trackingNumber, p_name: name });
+        await mueblesDelgadoApi.post("/delivery/assign", null, {
+          params: {
+              p_trackingNumber: trackingNumber,
+              p_name: name
+          }
+      });
         startGetAssignments();
         finishedCommand();
     } catch (error) {
@@ -51,7 +57,7 @@ export const useDriversStore = () => {
     try {
 
       const {data} = await mueblesDelgadoApi.get("/delivery/assignments");
-      dispatch(onSetAssignments(data.assignments)); 
+      dispatch(onSetAssignments(data)); 
       
     } catch (error) {
       throw new Error("Error al asignar el conductor al camión");

@@ -9,20 +9,22 @@ export const TableTrucks = ({trucks = [{ id: 0, trackingNumber: "", capacity: 0,
     const [showForm, setShowForm] = useState(false);
     const {startAssignDriverToTruck} = useDriversStore();    
     const [selectedTruck, setSelectedTruck] = useState(null);
-    const [formData, setFormData] = useState({ driverName: "", truckId: ""});
+    const [formData, setFormData] = useState({ driverName: ""});
   
     const findTruck = ( truckId = '' ) => {
       return trucks.find(truck => truck.id === truckId);
     }
   
-    const handleAssignDriver = (truckId) => {
-      setSelectedTruck(findTruck(truckId));
+    const handleAssignDriver = (trackingNumber) => {
+      setSelectedTruck(trackingNumber);
       setShowForm(true);
     };
   
-    const handleRemoveDriver = (truckId) => {
-      setSelectedTruck(findTruck(truckId));
+    const handleRemoveDriver = (trackingNumber) => {
+      setSelectedTruck(trackingNumber);
     };
+
+    
   
     const handleFormAssignSubmit = async (e) => {
         e.preventDefault();
@@ -32,7 +34,7 @@ export const TableTrucks = ({trucks = [{ id: 0, trackingNumber: "", capacity: 0,
         }
   
         try {
-          await startAssignDriverToTruck(selectedTruck.trackingNumber, formData.driverName);
+          await startAssignDriverToTruck(selectedTruck, formData.driverName);
   
           setShowForm(false);
           showSuccess("Conductor asiganado correctamente");
@@ -60,7 +62,7 @@ export const TableTrucks = ({trucks = [{ id: 0, trackingNumber: "", capacity: 0,
             <div> {/** tbody */}
             {trucks?.map((truck) => (
                 <div
-                    key={truck.id}
+                    key={truck.trackingNumber}
                     className="grid grid-cols-2 sm:grid-cols-4 text-center border [&>p]:border"
                 > {/** tr */}
                     <p>{truck.trackingNumber}</p>
@@ -68,18 +70,18 @@ export const TableTrucks = ({trucks = [{ id: 0, trackingNumber: "", capacity: 0,
                     <p>{truck.mileage}</p>
                     <div className="flex justify-center items-center gap-2">
                         <button
-                            onClick={() => handleAssignDriver(truck.id)}
+                            onClick={() => handleAssignDriver(truck.trackingNumber)}
                             className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 w-[36px] h-[36px] flex items-center justify-center"
                             title="Agregar conductor"
-                            disabled={!truck.isAvailable}
+                            // disabled={!truck.isAvailable}
                         >
                             <FontAwesomeIcon icon={faUserPlus} />
                         </button>
                         <button
-                            onClick={() => handleRemoveDriver(truck.id)}
+                            onClick={() => handleRemoveDriver(truck.trackingNumber)}
                             className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 w-[36px] h-[36px] flex items-center justify-center"
                             title="Eliminar conductor"
-                            disabled={truck.isAvailable}
+                            // disabled={truck.isAvailable}
                         >
                             <FontAwesomeIcon icon={faUserMinus} />
                         </button>
@@ -107,8 +109,8 @@ export const TableTrucks = ({trucks = [{ id: 0, trackingNumber: "", capacity: 0,
                   className="w-full px-4 py-2 border border-lineclr rounded-lg"
                 >
                   <option value="">Seleccionar...</option>
-                  {drivers?.map((driver) => (
-                    <option key={driver.id} value={driver.name}>
+                  {drivers?.map((driver,index) => (
+                    <option key={`${driver.licenseNumber} -- ${index}`} value={driver.name}>
                       {driver.name}
                     </option>
                   ))}

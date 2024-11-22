@@ -62,13 +62,13 @@ export const useAuthStore = () => {
     try {
       startCommand();
       const { data } = await mueblesDelgadoApi.get("/auth/admins");
-      dispatch(onSetAccounts(data.admins));
+      dispatch(onSetAccounts(data));
       
       finishedCommand();
     } catch (error) {
       finishedCommand();
       console.log(error);
-      throw new Error("Error al registrar al Conductor");
+      throw new Error("Error obtener cuentas");
     }
   }
 
@@ -82,7 +82,7 @@ export const useAuthStore = () => {
     } catch (error) {
       finishedCommand();
       console.log(error);
-      throw new Error("Error al registrar al Conductor");
+      throw new Error("Error al eliminar la cuenta");
     }
   }
 

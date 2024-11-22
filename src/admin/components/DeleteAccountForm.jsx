@@ -12,12 +12,11 @@ export const DeleteAccountForm = () => {
   const handleDeleteAccount = async ( id ) => {
     try {
       await startDeleteAccount(id);
-      showSuccess('Cuenta de administrador registrada exitosamente');
+      showSuccess('Cuenta de administrador eliminada exitosamente');
     } catch (error) {
       showErrorAlert(error.message);
     }
   }
-
 
   return (
     <div className="flex flex-col justify-center items-center">

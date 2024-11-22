@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm, useInventoryStore, useOrdersStore } from "../../../hooks";
-import { showErrorAlert } from "../helpers";
+import { showErrorAlert, showSuccess } from "../helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 
@@ -26,6 +26,7 @@ export const FormAddOrder = () => {
         setFurnitureList([...furnitureList, ...selectedFurnitures]);
         setSelectedFurnitures([]);
     };
+    
 
     const handleQuantityChange = (e, furnitureId) => {
         const newQuantity = parseInt(e.target.value, 10);
@@ -88,12 +89,14 @@ export const FormAddOrder = () => {
                 deliveryDate,
                 orderContent: mappedFurnitureList,
             };
+
+            console.log(newOrder);
     
             // await startCreateOrder(newOrder);
             // onResetForm();
             // setFurnitureList([]);
             // setSelectedFurnitures([]);
-            
+            // showSuccess('Creado Correctamente');
         } catch (error) {
             showErrorAlert(error.message);
         }

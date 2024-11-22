@@ -12,7 +12,7 @@ export const useTrucksStore = () => {
     const startGetTrucks = async () => {
         try {
             const {data} = await mueblesDelgadoApi.get("/delivery/trucks");
-            dispatch(onSetTrucks(data.trucks));
+            dispatch(onSetTrucks(data));
         } catch (error) {
             console.log(error);
             throw new Error("Error al obtener a los Conductores");
@@ -58,7 +58,7 @@ export const useTrucksStore = () => {
     const startGetOrderTruckAssignments = async () => {
         try {
             const {data} = await mueblesDelgadoApi.get("/logistics/assignments");
-            dispatch(onSetOrderTruckAssignments(data.assignments));
+            dispatch(onSetOrderTruckAssignments(data));
         } catch (error) {
             console.error("Error al registrar los camiones:", error.response?.data || error.message);
             throw new Error("Error al actualizar los camiones");

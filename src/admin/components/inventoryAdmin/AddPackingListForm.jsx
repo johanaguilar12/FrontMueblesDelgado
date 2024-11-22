@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm } from "../../../hooks";
+import { useForm, useInventoryStore } from "../../../hooks";
 import { isValidDate, showErrorAlert } from "../helpers";
 import { FormAddForniture } from './FormAddForniture';
 
@@ -17,6 +17,7 @@ export const AddPackingListForm = () => {
   const [furnitureList, setFurnitureList] = useState([]);
   const [ordersID, setOrdersID] = useState([]);
   const [isFurnitureFormOpen, setIsFurnitureFormOpen] = useState(false);
+  const {startAddPackingList} = useInventoryStore();
 
   const { folio, arrivalDate, onInputChange, isFormValid, onResetForm} = useForm(initialFormPackingList, formValidationsPackingList);
 
@@ -29,7 +30,7 @@ export const AddPackingListForm = () => {
     setFurnitureList((prevList) => prevList.filter((_, i) => i !== index));
   };
 
-  const onSubmitFormPackingList = (e) => {
+  const onSubmitFormPackingList = async (e) => {
     e.preventDefault();
 
     if (!isFormValid) {
@@ -47,11 +48,25 @@ export const AddPackingListForm = () => {
       return;
     }
 
-    console.log({
-      folio,
-      arrivalDate,
-      products: furnitureList,
-    });
+    try {
+
+      const newPackingList = {
+        folio,
+        products: furnitureList,
+        arrivalDate,
+      }
+
+      console.log(newPackingList);
+
+      await startAddPackingList(newPackingList);
+
+      setFurnitureList([]);
+      setOrdersID([]);
+      onResetForm();
+    } catch (error) {
+      showErrorAlert(error.message);
+    }
+
   };
 
   return (

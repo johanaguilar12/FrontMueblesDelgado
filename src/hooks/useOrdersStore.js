@@ -22,14 +22,14 @@ export const useOrdersStore = () => {
 
     const startCreateOrder = async (order) => {
         try {
-            // startCommand();
+            startCommand();
             const { data } = await mueblesDelgadoApi.post("/orders", order);
             console.log("Pedido creado exitosamente:", data.order);
 
             startGetOrders();
-            // finishedCommand();
+            finishedCommand();
         } catch (error) {
-            // finishedCommand();
+            finishedCommand();
             const message = error.response?.data?.message || "Error al crear el pedido";
             console.error("startCreateOrder Error:", message);
             throw new Error(message);

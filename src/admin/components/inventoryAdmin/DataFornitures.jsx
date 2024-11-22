@@ -19,11 +19,13 @@ export const DataFornitures = ({packinglist, setIsFurnituresModalOpen}) => {
                                     <br />
                                     <span>{`Color: ${furniture.color}`}</span>
                                     <br />
-                                    <span>{`Dimensión: largo: ${furniture.dimension.depth} x alto: ${furniture.dimension.height} x ancho: ${furniture.dimension.width}`}</span>
+                                    <span>{`Dimensión: largo: ${furniture.dimension.length} x alto: ${furniture.dimension.height} x ancho: ${furniture.dimension.width}`}</span>
                                     <br />
                                     <span>{`Cantidad: ${furniture.quantity}`}</span>
                                     <br />
                                     <span>{`Tiempo de Montaje: ${furniture.buildTime} minutos`}</span>
+                                    <br />
+                                    <span>{`ID de la orden: ${furniture.orderID}`}</span>
                                     <br />
                                 </div>
                             </li>
