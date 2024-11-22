@@ -1459,7 +1459,7 @@ fraction.js@^4.3.7:
     "@fortawesome/react-fontawesome" "^0.2.2"
     "@reduxjs/toolkit" "^2.3.0"
     axios "^1.7.7"
-    frontmueblesdelgado "file:../../../AppData/Local/Yarn/Cache/v6/npm-frontmueblesdelgado-0.0.0-9cd04180-1109-4b64-9741-2665e8a46456-1732169052820/node_modules/frontmueblesdelgado"
+    frontmueblesdelgado "file:../../../../../AppData/Local/Yarn/Cache/v6/npm-frontmueblesdelgado-0.0.0-f1f560bc-1223-46a8-98d5-ab8b56a61ae1-1732231063602/node_modules/frontmueblesdelgado"
     react "^18.3.1"
     react-dom "^18.3.1"
     react-redux "^9.1.2"

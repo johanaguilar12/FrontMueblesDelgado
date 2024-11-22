@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { useForm } from "../../../hooks";
 import { showErrorAlert } from "../helpers";
 
-
-
 const initialFurnitureForm = {
     furnitureId: '',
+    orderID: '',
     type: '',
     brand: '',
     color: '',
@@ -15,6 +15,7 @@ const initialFurnitureForm = {
   
 const furnitureValidations = {
     furnitureId: [(value) => value.trim() !== '', 'El ID es obligatorio'],
+    // orderID: [(value) => value.trim() !== '', 'El ID es obligatorio'],
     type: [(value) => value.trim() !== '', 'El tipo es obligatorio'],
     brand: [(value) => value.trim() !== '', 'La marca es obligatoria'],
     color: [(value) => value.trim() !== '', 'El color es obligatorio'],
@@ -23,9 +24,10 @@ const furnitureValidations = {
     buildTime: [(value) => value.trim() !== '', 'El tiempo de construcción es obligatorio'],
 };
 
-export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen}) => {
+export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen, ordersID, setOrdersID}) => {
     const {
         furnitureId,
+        orderID,
         type,
         brand,
         color,
@@ -37,26 +39,34 @@ export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen}) =
         onResetForm: resetFurnitureForm,
     } = useForm(initialFurnitureForm, furnitureValidations);
 
-    const newForniture = ( ) => {
-        return { furnitureId, type, brand, color, dimension, quantity: Number(quantity), buildTime };
+    const [isAddingNewOrderID, setIsAddingNewOrderID] = useState(false);
+    const [newOrderID, setNewOrderID] = useState('');
+
+
+    const newForniture = () => {
+      return { furnitureId, orderID: isAddingNewOrderID ? newOrderID : orderID, type, brand, color, dimension, quantity: Number(quantity), buildTime };
     }
 
-    const handleSendNewForniture = () => {
-        if (!isFurnitureValid) {
-          showErrorAlert('Por favor, completa todos los campos del mueble correctamente');
-          return;
-        }
-        
-        handleAddFurniture(newForniture());
-        resetFurnitureForm();
+  const handleSendNewForniture = () => {
+    if (!isFurnitureValid) {
+      showErrorAlert('Por favor, completa todos los campos del mueble correctamente');
+      return;
     }
+    if (isAddingNewOrderID && !ordersID.includes(newOrderID)) {
+        setOrdersID([...ordersID, newOrderID]);
+    }
+    handleAddFurniture(newForniture());
+    resetFurnitureForm();
+    setIsAddingNewOrderID(false);
+    setNewOrderID('');
+  }
 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h3 className="font-bold text-xl mb-4">Agregar Mueble</h3>
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()} className="grid grid-cols-2 space-x-3">
           <div className="mb-4">
             <label htmlFor="furnitureId" className="block font-semibold mb-2">
               ID del Mueble
@@ -69,6 +79,41 @@ export const FormAddForniture = ({handleAddFurniture, setIsFurnitureFormOpen}) =
               onChange={onFurnitureChange}
               className="w-full px-4 py-2 border rounded-lg"
             />
+          </div>
+          <div className="mb-4">
+            <label htmlFor={isAddingNewOrderID ? 'newOrderID' : 'orderID'} className="block font-semibold mb-2">
+                ID de la orden
+            </label>
+                        {isAddingNewOrderID ? (
+                            <input
+                                type="text"
+                                name="newOrderID"
+                                id="newOrderID"
+                                value={newOrderID}
+                                onChange={(e) => setNewOrderID(e.target.value)}
+                                className="w-full px-4 py-2 border rounded-lg"
+                            />
+                        ) : (
+                          <select
+                          name="orderID"
+                          id="orderID"
+                          value={orderID}
+                          onChange={(e) => {
+                              if (e.target.value === 'new') {
+                                  setIsAddingNewOrderID(true);
+                              } else {
+                                  onFurnitureChange(e);
+                              }
+                          }}
+                          className="w-full px-4 py-2 border rounded-lg"
+                      >
+                          <option value="" disabled>Seleccionar ID de la orden</option>
+                          {ordersID.map((id) => (
+                              <option key={id} value={id}>{id}</option>
+                          ))}
+                          <option value="new">Agregar nuevo ID de la orden</option>
+                      </select>
+                  )}
           </div>
           <div className="mb-4">
             <label htmlFor="type" className="block font-semibold mb-2">

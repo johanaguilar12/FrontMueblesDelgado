@@ -15,6 +15,7 @@ const formValidationsPackingList = {
 
 export const AddPackingListForm = () => {
   const [furnitureList, setFurnitureList] = useState([]);
+  const [ordersID, setOrdersID] = useState([]);
   const [isFurnitureFormOpen, setIsFurnitureFormOpen] = useState(false);
 
   const { folio, arrivalDate, onInputChange, isFormValid, onResetForm} = useForm(initialFormPackingList, formValidationsPackingList);
@@ -111,6 +112,8 @@ export const AddPackingListForm = () => {
                 <div>
                     <span>{`ID: ${furniture.furnitureId}`}</span>
                     <br />
+                    <span>{`ID order: ${furniture.orderID}`}</span>
+                    <br />
                     <span>{`Tipo: ${furniture.type}`}</span>
                     <br />
                     <span>{`Marca: ${furniture.brand}`}</span>
@@ -147,7 +150,7 @@ export const AddPackingListForm = () => {
 
       {/* Overlay for Furniture Form */}
       {isFurnitureFormOpen && (
-        <FormAddForniture handleAddFurniture={handleAddFurniture} setIsFurnitureFormOpen={setIsFurnitureFormOpen} />
+        <FormAddForniture handleAddFurniture={handleAddFurniture} setIsFurnitureFormOpen={setIsFurnitureFormOpen} ordersID={ordersID} setOrdersID={setOrdersID}/>
       )}
     </div>
   );

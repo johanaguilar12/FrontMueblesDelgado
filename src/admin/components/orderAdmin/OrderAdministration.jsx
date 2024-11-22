@@ -2,17 +2,17 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useOrdersStore } from "../../../hooks"
 import { faBoxOpen, faMinus } from "@fortawesome/free-solid-svg-icons";
-import { DataFornitures } from "../inventoryAdmin";
+import { DataFurnituresOrders } from "./DataFurnituresOrders";
 
 
 export const OrderAdministration = () => {
-    const [isFurnituresModalOpen, setIsFurnituresModalOpen] = useState(false);
-    const [selectedOrder, setSelectedOrder] = useState({});
+    const [isFurnituresOrderModalOpen, setIsFurnituresOrderModalOpen] = useState(false);
+    const [selectedOrder, setSelectedOrder] = useState([]);
     const {orders} = useOrdersStore();
 
     const handleShowFornitures = ( order ) => {
         setSelectedOrder(order)
-        setIsFurnituresModalOpen(true);
+        setIsFurnituresOrderModalOpen(true);
     }
 
   return (
@@ -59,8 +59,8 @@ export const OrderAdministration = () => {
                 </div>
             </div> {/* fin tabla*/}
 
-            {isFurnituresModalOpen && (
-                <DataFornitures packinglist={selectedOrder} setIsFurnituresModalOpen = {setIsFurnituresModalOpen}/>
+            {isFurnituresOrderModalOpen && (
+                <DataFurnituresOrders selectedOrder={selectedOrder} setIsFurnituresOrderModalOpen={setIsFurnituresOrderModalOpen}/>
             )}
 
         </div>

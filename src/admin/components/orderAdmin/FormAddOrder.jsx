@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useForm, useInventoryStore, useOrdersStore } from "../../../hooks";
 import { showErrorAlert } from "../helpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus } from "@fortawesome/free-solid-svg-icons";
 
 
 const initialOrderForm = {
@@ -18,7 +20,7 @@ export const FormAddOrder = () => {
     const [selectedFurnitures, setSelectedFurnitures] = useState([]);
     const {destination, deliveryDate, isFormValid, onInputChange, onResetForm} = useForm(initialOrderForm, furnitureValidations);
     const {furnitures} =  useInventoryStore();
-    const {startCreateOrder, startGetOrders} = useOrdersStore();
+    const {startCreateOrder} = useOrdersStore();
 
     const handleAssignOrders = () => {
         setFurnitureList([...furnitureList, ...selectedFurnitures]);
@@ -58,6 +60,12 @@ export const FormAddOrder = () => {
         setSelectedFurnitures(selected);
     };
 
+    const handleDeselectForniture = (furnitureId) => {
+        setFurnitureList((prevFurnitureList) =>
+            prevFurnitureList.filter((furniture) => furniture.furnitureId !== furnitureId)
+        );
+    };
+
     const handleFilterSelected = (furniture) => {
         return !furnitureList.some((assignedFurniture) => assignedFurniture.furnitureId === furniture.furnitureId);
     };
@@ -81,10 +89,10 @@ export const FormAddOrder = () => {
                 orderContent: mappedFurnitureList,
             };
     
-            await startCreateOrder(newOrder);
-            onResetForm();
-            setFurnitureList([]);
-            setSelectedFurnitures([]);
+            // await startCreateOrder(newOrder);
+            // onResetForm();
+            // setFurnitureList([]);
+            // setSelectedFurnitures([]);
             
         } catch (error) {
             showErrorAlert(error.message);
@@ -139,8 +147,15 @@ export const FormAddOrder = () => {
                                     id={`quantity-${furniture.furnitureId}`}
                                     value={furniture.quantity}
                                     onChange={(e) => handleQuantityChange(e, furniture.furnitureId)}
-                                    className="ml-5 w-24 px-4 py-2 border rounded-lg"
+                                    className="mx-5 w-24 px-4 py-2 border rounded-lg"
                                 />
+                                <button
+                                type="button"
+                                    className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 w-[36px] h-[36px]"
+                                    onClick={() => handleDeselectForniture(furniture.furnitureId)}
+                                >
+                                    <FontAwesomeIcon icon={faMinus}/>
+                                </button>
                             </li>
                         ))}
                     </ul>
