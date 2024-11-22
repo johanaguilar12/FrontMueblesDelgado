@@ -79,22 +79,22 @@ export const SideBar = () => {
                         <FontAwesomeIcon icon={faChevronLeft} className="sizeSVG" />
                     </button>
                 </li>
-                <li className={activeTab === '' ? 'active' : ''}>
+                {/* <li className={activeTab === '' ? 'active' : ''}>
                     <Link to={''}>
                         <FontAwesomeIcon icon={faHome} className="sizeSVG" />
                         <span>Inicio</span>
+                    </Link>
+                </li> */}
+                <li className={activeTab === '' ? 'active' : ''}>
+                    <Link to={''}>
+                        <FontAwesomeIcon icon={faClipboardList} className="sizeSVG" />
+                        <span>Inventariado</span>
                     </Link>
                 </li>
                 <li className={activeTab === '/deliveryroutes' ? 'active' : ''}>
                     <Link to={'deliveryroutes'}>
                         <FontAwesomeIcon icon={faRoute} className="sizeSVG" />
                         <span>Rutas de Entrega</span>
-                    </Link>
-                </li>
-                <li className={activeTab === '/inventoryadmin' ? 'active' : ''}>
-                    <Link to={'inventoryadmin'}>
-                        <FontAwesomeIcon icon={faClipboardList} className="sizeSVG" />
-                        <span>Inventariado</span>
                     </Link>
                 </li>
                 <li className={activeTab === '/searchfurniture' ? 'active' : ''}>

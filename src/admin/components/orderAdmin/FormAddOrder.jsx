@@ -90,13 +90,11 @@ export const FormAddOrder = () => {
                 orderContent: mappedFurnitureList,
             };
 
-            console.log(newOrder);
-    
-            // await startCreateOrder(newOrder);
-            // onResetForm();
-            // setFurnitureList([]);
-            // setSelectedFurnitures([]);
-            // showSuccess('Creado Correctamente');
+            await startCreateOrder(newOrder);
+            onResetForm();
+            setFurnitureList([]);
+            setSelectedFurnitures([]);
+            showSuccess('Creado Correctamente');
         } catch (error) {
             showErrorAlert(error.message);
         }

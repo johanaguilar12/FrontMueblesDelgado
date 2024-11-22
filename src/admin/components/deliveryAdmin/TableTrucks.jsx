@@ -55,7 +55,7 @@ export const TableTrucks = ({trucks = [{ id: 0, trackingNumber: "", capacity: 0,
                     <p>Camión</p>
                     <p>Capacidad</p>
                     <p>Kilometraje</p>
-                    <p>Acciones</p>
+                    <p>Asignar Conductor</p>
                 </div>
             </div>
             
@@ -73,17 +73,8 @@ export const TableTrucks = ({trucks = [{ id: 0, trackingNumber: "", capacity: 0,
                             onClick={() => handleAssignDriver(truck.trackingNumber)}
                             className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 w-[36px] h-[36px] flex items-center justify-center"
                             title="Agregar conductor"
-                            // disabled={!truck.isAvailable}
                         >
                             <FontAwesomeIcon icon={faUserPlus} />
-                        </button>
-                        <button
-                            onClick={() => handleRemoveDriver(truck.trackingNumber)}
-                            className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 w-[36px] h-[36px] flex items-center justify-center"
-                            title="Eliminar conductor"
-                            // disabled={truck.isAvailable}
-                        >
-                            <FontAwesomeIcon icon={faUserMinus} />
                         </button>
                     </div>
                 </div>

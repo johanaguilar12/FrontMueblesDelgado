@@ -23,27 +23,21 @@ export const useInventoryStore = () => {
 
     const startGetPackingLists = async () => {
       try {
-        // startCommand();
         const {data} = await mueblesDelgadoApi.get("/inventory/getpackinglist");
         dispatch(onSetPackingLists(data));
-        // finishedCommand(data);
       } catch (error) {
-        // finishedCommand();
         console.log(error);
-        throw new Error("Error al agregar La packing List");
+        throw new Error("Error al obtener los packingList");
       }
   }
 
     const startGetFurnitures = async () => {
       try {
-        // startCommand();
         const {data} = await mueblesDelgadoApi.get("/inventory/retrieve_furniture");
         dispatch(onSetFornitures(data));
-        // finishedCommand(data);
       } catch (error) {
-        // finishedCommand();
         console.log(error);
-        throw new Error("Error al agregar La packing List");
+        throw new Error("Error al obtener los muebles");
       }
   }
     

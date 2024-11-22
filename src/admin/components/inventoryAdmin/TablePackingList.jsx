@@ -48,13 +48,6 @@ export const TablePackingList = () => {
                   >
                     <FontAwesomeIcon icon={faBoxOpen} />
                   </button>
-                  <button
-                    // onClick={() => handleRemoveDriver(truck.id)}
-                    className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 w-[36px] h-[36px] flex items-center justify-center"
-                    title="Eliminar conductor"
-                  >
-                    <FontAwesomeIcon icon={faMinus} />
-                  </button>
                 </div>
               </div>
             ))}

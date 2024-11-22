@@ -4,16 +4,17 @@ import { CreateAccountForm, DeleteAccountForm, FormAddOrder, FormAssignmnetOrder
 
 
 export const AdminRoutes = [
-  {
-    index: true,
-    element: <Admin />,
-  },
+  // {
+  //   index: true,
+  //   element: <Admin />,
+  // },
   {
     path: 'deliveryroutes',
     element: <DeliveryRoutes />,
   },
   {
-    path: 'inventoryadmin',
+    // path: 'inventoryadmin',
+    index: true,
     element: <InventoryAdmin />,
   },
   {

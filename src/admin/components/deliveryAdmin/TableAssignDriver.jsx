@@ -33,10 +33,9 @@ export const TableAssignDriver = ({
       </h2>
       <div className="w-full border"> {/** Table */}
         <div> {/** thead */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 text-center border [&>p]:border [&>p]:text-customBlue text-lg font-semibold"> {/** tr */}
+          <div className="grid grid-cols-2 text-center border [&>p]:border [&>p]:text-customBlue text-lg font-semibold"> {/** tr */}
             <p>Camión</p>
             <p>Conductor</p>
-            <p>Acciones</p>
           </div>
         </div>
 
@@ -44,11 +43,11 @@ export const TableAssignDriver = ({
           {assignments?.map((assignment) => (
             <div
               key={`${assignment.assignmentId} -- ${assignment.deliveryTruck.trackingNumber} -- ${assignment.truckDriver.name}`}
-              className="grid grid-cols-2 sm:grid-cols-3 text-center border [&>p]:border"
+              className="grid grid-cols-2 text-center border [&>p]:border"
             > {/** tr */}
             <p>{assignment.deliveryTruck.trackingNumber}</p>
             <p>{assignment.truckDriver ? assignment.truckDriver.name : "Sin Asignar"}</p>
-              <div className="flex justify-center items-center gap-2">
+              {/* <div className="flex justify-center items-center gap-2">
                 <button
                   onClick={() => handleAssignDriver(assignment.deliveryTruck.id)}
                   className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 w-[36px] h-[36px] flex items-center justify-center"
@@ -56,7 +55,7 @@ export const TableAssignDriver = ({
                 >
                   <FontAwesomeIcon icon={faPray} />
                 </button>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

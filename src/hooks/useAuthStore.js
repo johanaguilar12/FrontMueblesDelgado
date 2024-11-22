@@ -35,8 +35,8 @@ export const useAuthStore = () => {
 
     try {
       const { data } = await mueblesDelgadoApi.get("/auth/renew");
-      localStorage.setItem("token", data.token);
-      dispatch(onLogin(data.name));
+      localStorage.setItem("token", data);
+      dispatch(onLogin(data.user));
 
     } catch (error) {
         localStorage.clear();

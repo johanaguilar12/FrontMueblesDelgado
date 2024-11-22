@@ -286,7 +286,7 @@ export const PrivateRoutes = ({ children }) => {
   
 
   // const { status, checkAuthToken } = useAuthStore();
-  // const { drivers } = useSelector((state) => state.drivers);
+  const [isReady, setIsReady] = useState(false);
   const {status: statusCommand} = useAdmin();
   const {startGetPackingLists, startGetFurnitures} = useInventoryStore();
   const {startGetAccounts} = useAuthStore();
@@ -296,6 +296,7 @@ export const PrivateRoutes = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // checkAuthToken();
     // dispatch(onSetTrucks(trucksEjemplo));
     // dispatch(onSetDrivers(drivers));
     // dispatch(onSetPackingLists(PackingList));
@@ -305,19 +306,38 @@ export const PrivateRoutes = ({ children }) => {
     startGetTrucks();
     startGetAssignments();
     startGetFurnitures();
-    dispatch(onSetOrders(Orders));
-    dispatch(onSetOrderTruckAssignments(OrderTruckAssignment));
+    // dispatch(onSetOrders(Orders));
+    // dispatch(onSetOrderTruckAssignments(OrderTruckAssignment));
     // dispatch(onSetAssignments(assignmentsEjemplo));
     // dispatch(onSetFornitures(furniture));
   }, []);
 
   // useEffect(() => {
-  //   checkAuthToken();
-  // }, [])
+  //   const initializeData = async () => {
+  //     try {
+  //       await Promise.all([
+  //         checkAuthToken(),
+  //         startGetPackingLists(),
+  //         startGetAccounts(),
+  //         startGetDrivers(),
+  //         startGetTrucks(),
+  //         startGetAssignments(),
+  //         startGetFurnitures(),
+  //       ]);
+  //       setIsReady(true);
+  //     } catch (error) {
+  //       console.error("Error during initialization:", error);
+  //     }
+  //   };
+  
+  //   initializeData();
+  // }, []);
+  
 
-  if (statusCommand === "starting") {
-    return <LoadingElement />
-  }
+
+  // if (!isReady || status === "checking" || statusCommand === "starting") {
+  //   return <LoadingElement />;
+  // }
 
 
 
