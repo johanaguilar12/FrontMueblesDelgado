@@ -119,9 +119,9 @@ export const PrivateRoutes = ({ children }) => {
 
   const Orders = [
     {
-      orderID: "O-001",
+      orderID: "001",
       destination: "Ciudad de México, CDMX",
-      deliveryDate: "2024-11-01",
+      deliveryDate: "2024-11-22",
       orderContent: [
         {
           type: "Mesa",
@@ -142,9 +142,9 @@ export const PrivateRoutes = ({ children }) => {
       ],
     },
     {
-      orderID: "O-002",
+      orderID: "002",
       destination: "Guadalajara, Jalisco",
-      deliveryDate: "2024-11-05",
+      deliveryDate: "2024-11-23",
       orderContent: [
         {
           type: "Escritorio",
@@ -157,9 +157,9 @@ export const PrivateRoutes = ({ children }) => {
       ],
     },
     {
-      orderID: "O-003",
+      orderID: "003",
       destination: "Monterrey, Nuevo León",
-      deliveryDate: "2024-11-12",
+      deliveryDate: "2024-11-22",
       orderContent: [
         {
           type: "Cama",
@@ -306,7 +306,7 @@ export const PrivateRoutes = ({ children }) => {
     startGetTrucks();
     startGetAssignments();
     startGetFurnitures();
-    // dispatch(onSetOrders(Orders));
+    dispatch(onSetOrders(Orders));
     // dispatch(onSetOrderTruckAssignments(OrderTruckAssignment));
     // dispatch(onSetAssignments(assignmentsEjemplo));
     // dispatch(onSetFornitures(furniture));
@@ -338,6 +338,11 @@ export const PrivateRoutes = ({ children }) => {
   // if (!isReady || status === "checking" || statusCommand === "starting") {
   //   return <LoadingElement />;
   // }
+  
+  if (statusCommand === "starting") {
+    return <LoadingElement />;
+  }
+  
 
 
 

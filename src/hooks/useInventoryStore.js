@@ -31,14 +31,14 @@ export const useInventoryStore = () => {
       }
   }
 
-    const startGetFurnitures = async () => {
-      try {
-        const {data} = await mueblesDelgadoApi.get("/inventory/retrieve_furniture");
-        dispatch(onSetFornitures(data));
-      } catch (error) {
-        console.log(error);
-        throw new Error("Error al obtener los muebles");
-      }
+  const startGetFurnitures = async () => {
+    try {
+      const {data} = await mueblesDelgadoApi.get("/inventory/retrieve_furniture");
+      dispatch(onSetFornitures(data));
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error al obtener los muebles");
+    }
   }
     
 
