@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import mueblesDelgadoApi from "../api/mueblesDelgadoApi";
-import { onSetOrders, onSetPackingListOrderID } from "../store";
+import { onSetOrders, onSetPackingListOrderID, onDeleteOrder } from "../store";
 import { useAdmin } from "./useAdmin";
+import Swal from "sweetalert2";
 
 
 export const useOrdersStore = () => {
@@ -50,13 +51,28 @@ export const useOrdersStore = () => {
 
     const startRemoveOrder = async (orderId) => {
         try {
-            await mueblesDelgadoApi.delete(`/orders/${orderId}`);
-            console.log("Pedido eliminado exitosamente");
-            startGetOrders();
+            const result = await Swal.fire({
+                title: '¿Estás seguro?',
+                text: "No podrás revertir esto",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            });
+
+            if (result.isConfirmed) {
+                await mueblesDelgadoApi.delete(`/orders/${orderId}`);
+                
+                dispatch(onDeleteOrder(orderId));
+
+                Swal.fire('Eliminado!', 'El pedido ha sido eliminado.', 'success');
+            }
         } catch (error) {
             const message = error.response?.data?.message || "Error al eliminar el pedido";
             console.error("startRemoveOrder Error:", message);
-            throw new Error(message);
+            Swal.fire('Error', message, 'error');
         }
     };
 

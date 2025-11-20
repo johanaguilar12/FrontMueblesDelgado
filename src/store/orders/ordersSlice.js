@@ -17,8 +17,10 @@ export const ordersSlice = createSlice({
         onSetRoutes: (state, { payload } ) => {
             state.routes = payload;
         },
+        onDeleteOrder: (state, { payload }) => {
+            state.orders = state.orders.filter(order => order.orderID !== payload);
+        },
     }
 });
 
-// Action creators are generated for each case reducer function
-export const { onSetOrders, onSetPackingListOrderID, onSetRoutes } = ordersSlice.actions;
+export const { onSetOrders, onSetPackingListOrderID, onSetRoutes, onDeleteOrder } = ordersSlice.actions;
